@@ -60,11 +60,12 @@
     </div>
     <div class="side-container">
       <div class="side-container-buttons">
-        <button type="button" class="side-button">This Month</button>
-        <button type="button" class="side-button">Last Month</button>
-        <button type="button" class="side-button is-active">Last Week</button>
-        <button type="button" class="side-button">This Year</button>
-        <button type="button" class="side-button">Last Year</button>
+        <button type="button" class="side-button" (click)="selectRange('tm')" [class.is-active]="range === 'tm'">This Month</button>
+        <button type="button" class="side-button" (click)="selectRange('lm')" [class.is-active]="range === 'lm'">Last Month</button>
+        <button type="button" class="side-button" (click)="selectRange('tw')" [class.is-active]="range === 'tw'">This Week</button>
+        <button type="button" class="side-button" (click)="selectRange('lw')" [class.is-active]="range === 'lw'">Last Week</button>
+        <button type="button" class="side-button" (click)="selectRange('ty')" [class.is-active]="range === 'ty'">This Year</button>
+        <button type="button" class="side-button" (click)="selectRange('ly')" [class.is-active]="range === 'ly'">Last Year</button>
       </div>
       <span class="close-icon" (click)="closeCalendar($event)">
         <svg width="20px" height="20px" viewBox="47 44 20 20" version="1.1">

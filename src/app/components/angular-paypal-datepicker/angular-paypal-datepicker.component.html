@@ -1,4 +1,5 @@
 <div class="angular-paypal-datepicker">
+
   <div class="input-section">
     <span class="label-txt">Start</span>
     <span class="value-txt">07/12/16</span>
@@ -10,9 +11,10 @@
       </svg>
     </span>
   </div>
+
   <div class="input-section">
     <span class="label-txt">End</span>
-    <span class="value-txt">07/12/16</span>
+    <span class="value-txt">07/03/17</span>
     <span class="cal-icon">
       <svg width="94px" height="94px" viewBox="3 3 94 94" version="1.1">
         <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(3.000000, 3.000000)">
@@ -21,6 +23,7 @@
       </svg>
     </span>
   </div>
+
   <div class="calendar">
     <div class="calendar-container">
       <div class="controls">
@@ -42,9 +45,26 @@
         <span class="day-name" *ngFor="let name of dayNames">{{ name }}</span>
       </div>
       <div class="days">
-        <div class="day" *ngFor="let d of days; let i = index;">
-          <span *ngIf="d.visible">{{ d.day }}</span>
+        <div class="day"
+             *ngFor="let d of days; let i = index;"
+             [ngClass]="{
+               'is-within-range': d.isWithinRange,
+               'is-from': d.from,
+               'is-to': d.to,
+               'is-first-weekday': d.weekday === 1 || d.firstMonthDay,
+               'is-last-weekday': d.weekday === 0 || d.lastMonthDay }"
+             (click)="selectDate($event, i)">
+          <span *ngIf="d.visible" class="day-num" [class.is-active]="d.from || d.to">{{ d.day }}</span>
         </div>
+      </div>
+    </div>
+    <div class="side-container">
+      <div class="side-container-buttons">
+        <button type="button" class="side-button">This Month</button>
+        <button type="button" class="side-button">Last Month</button>
+        <button type="button" class="side-button is-active">Last Week</button>
+        <button type="button" class="side-button">This Year</button>
+        <button type="button" class="side-button">Last Year</button>
       </div>
     </div>
   </div>

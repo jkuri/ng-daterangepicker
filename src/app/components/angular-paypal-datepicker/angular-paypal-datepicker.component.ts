@@ -8,11 +8,15 @@ import * as dateFns from 'date-fns';
 })
 export class AngularPayPalDatepickerComponent implements OnInit {
   date: Date;
+  dateFrom: Date;
+  dateTo: Date;
   dayNames: string[];
   days: any[];
 
   ngOnInit() {
-    this.date = new Date();
+    this.date = dateFns.startOfDay(new Date());
+    this.dateFrom = dateFns.startOfDay(dateFns.subWeeks(this.date, 3));
+    this.dateTo = this.date;
     this.initNames();
     this.generateDays();
   }
@@ -30,8 +34,14 @@ export class AngularPayPalDatepickerComponent implements OnInit {
       return {
         date: d,
         day: dateFns.getDate(d),
+        weekday: dateFns.getDay(d),
         today: dateFns.isToday(d),
-        visible: true
+        firstMonthDay: dateFns.isFirstDayOfMonth(d),
+        lastMonthDay: dateFns.isLastDayOfMonth(d),
+        visible: true,
+        from: dateFns.isSameDay(this.dateFrom, d),
+        to: dateFns.isSameDay(this.dateTo, d),
+        isWithinRange: dateFns.isWithinRange(d, this.dateFrom, this.dateTo)
       };
     });
 
@@ -43,13 +53,24 @@ export class AngularPayPalDatepickerComponent implements OnInit {
         return {
           date: d,
           day: dateFns.getDate(d),
+          weekday: dateFns.getDay(d),
+          firstMonthDay: dateFns.isFirstDayOfMonth(d),
+          lastMonthDay: dateFns.isLastDayOfMonth(d),
           today: false,
-          visible: false
+          visible: false,
+          from: false,
+          to: false,
+          isWithinRange: false
         };
       });
     }
 
     this.days = prevMonthDays.concat(days);
+  }
+
+  selectDate(e: MouseEvent, index: number): void {
+    this.dateTo = this.days[index].date;
+    this.generateDays();
   }
 
   prevMonth(): void {

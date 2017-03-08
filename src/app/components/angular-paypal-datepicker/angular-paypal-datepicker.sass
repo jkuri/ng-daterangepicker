@@ -30,6 +30,9 @@
     cursor: pointer
     position: relative
 
+    &:first-child
+      border-right: 1px solid $border-light
+
     .label-txt, .value-txt
       display: block
 
@@ -85,6 +88,7 @@
       height: 100%
       padding: 20px
       border-right: 1px solid $border-light
+      float: left
 
       .controls
         width: 100%
@@ -110,7 +114,7 @@
         margin-bottom: 20px
 
         .day-name
-          width: calc(100% / 7)
+          width: calc(300px / 7)
           font-size: 13px
           color: $grey
           display: block
@@ -122,13 +126,65 @@
         width: 300px
 
         .day
-          width: calc(100% / 7)
+          width: calc(300px / 7)
           font-size: 13px
           color: $grey
           display: block
           float: left
           text-align: center
           margin-bottom: 15px
-          padding: 5px
           cursor: pointer
 
+          &.is-within-range
+            background: $blue-light
+            color: $dark
+
+          &.is-from, &.is-first-weekday
+            border-top-left-radius: 50%
+            border-bottom-left-radius: 50%
+
+          &.is-to, &.is-last-weekday
+            border-top-right-radius: 50%
+            border-bottom-right-radius: 50%
+
+          .day-num
+            display: flex
+            justify-content: center
+            align-items: center
+            float: left
+            width: calc(300px / 7)
+            height: 100%
+            border-radius: 50%
+            padding: 10px 15px
+
+            &:hover, &.is-active
+              background: $blue
+              color: $white
+
+    .side-container
+      width: 158px
+      height: 100%
+      padding: 10px
+      display: flex
+      align-items: center
+
+      .side-container-buttons
+        width: 138px
+
+        .side-button
+          background: $white
+          border-radius: 15px
+          border: 1px solid $blue
+          height: 30px
+          width: 138px
+          display: block
+          text-align: center
+          outline: none
+          margin-bottom: 15px
+          color: $text-button
+          font-size: 13px
+          cursor: pointer
+
+          &:hover, &.is-active
+            background: $blue
+            color: $white

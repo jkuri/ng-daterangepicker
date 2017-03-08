@@ -18,12 +18,14 @@
   border-radius: 7px
   position: relative
 
+  &.is-active
+    border: 1px solid $blue
+
   .input-section
-    width: 149px
+    width: calc(100% / 2)
     height: 50px
     display: block
     float: left
-    border: none
     outline: none
     padding: 7px 10px
     color: $text
@@ -43,6 +45,7 @@
     .value-txt
       color: $text
       font-size: 13px
+      border-bottom: 1px solid transparent
 
     .cal-icon
       position: absolute
@@ -82,9 +85,15 @@
       border-top: 1px solid $blue
       border-left: 1px solid $blue
       background: $white
+      transition: left 0.5s
 
     &.is-opened
       display: block
+
+    &.is-to
+
+      &:after
+        left: 215px
 
     .calendar-container
       display: inline-block
@@ -173,6 +182,7 @@
       padding: 10px
       display: flex
       align-items: center
+      position: relative
 
       .side-container-buttons
         width: 138px
@@ -194,3 +204,11 @@
           &:hover, &.is-active
             background: $blue
             color: $white
+
+      .close-icon
+        position: absolute
+        width: 20px
+        height: 20px
+        top: 20px
+        right: 15px
+        cursor: pointer

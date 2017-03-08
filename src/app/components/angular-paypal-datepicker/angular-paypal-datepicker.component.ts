@@ -73,11 +73,32 @@ export class AngularPayPalDatepickerComponent implements OnInit {
   }
 
   toggleCalendar(e: MouseEvent, selection: 'from' | 'to'): void {
-    this.opened = this.opened ? false : selection;
+    if (this.opened && this.opened !== selection) {
+      this.opened = selection;
+    } else {
+      this.opened = this.opened ? false : selection;
+    }
+  }
+
+  closeCalendar(e: MouseEvent): void {
+    this.opened = false;
   }
 
   selectDate(e: MouseEvent, index: number): void {
-    this.dateTo = this.days[index].date;
+    let selectedDate: Date = this.days[index].date;
+    if ((this.opened === 'from' && dateFns.isAfter(selectedDate, this.dateTo)) ||
+        (this.opened === 'to' && dateFns.isBefore(selectedDate, this.dateFrom))) {
+      return;
+    }
+
+    if (this.opened === 'from') {
+      this.dateFrom = selectedDate;
+      this.opened = 'to';
+    } else if (this.opened === 'to') {
+      this.dateTo = selectedDate;
+      this.opened = 'from';
+    }
+
     this.generateCalendar();
   }
 

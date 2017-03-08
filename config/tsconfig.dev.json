@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "rootDir": "../",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "mapRoot": "",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "outDir": "lib"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "server",
+    "src/main.aot.ts",
+    "scripts",
+    "src/polyfills.ts",
+    "src/vendor.ts",
+    "src/test.ts",
+    "src/app/app.module.universal.ts",
+    "src/testing/**/*",
+    "src/**/*.spec.ts",
+    "src/app/shared/services/translation/universal/translate-universal-loader.ts"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "./src/ngfactory",
+    "entryModule": "src/app/app.module#AppModule"
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "silent": true
+  }
+}

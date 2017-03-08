@@ -1,0 +1,75 @@
+{
+  "name": "angular-paypal-datepicker",
+  "version": "0.0.0",
+  "description": "Angular PayPal Datepicker",
+  "scripts": {
+    "webpack": "npm run clean && webpack --config config/webpack.config.js --progress --bail",
+    "serve": "webpack-dev-server --config config/webpack.config.dev.js",
+    "start": "npm run serve",
+    "roll": "npm run webpack",
+    "build": "npm run roll",
+    "clean": "rimraf dist/ src/ngfactory lib",
+    "lint": "npm run tslint \"src/**/*.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkuri/angular-paypal-datepicker.git"
+  },
+  "keywords": [
+    "Angular",
+    "PayPal",
+    "date",
+    "datepicker",
+    "range",
+    "daterange",
+    "daterangepicker"
+  ],
+  "author": "Jan Kuri <jkuri88@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jkuri/angular-paypal-datepicker/issues"
+  },
+  "homepage": "https://github.com/jkuri/angular-paypal-datepicker#readme",
+  "devDependencies": {
+    "@angular/animations": "^4.0.0-rc.2",
+    "@angular/common": "^4.0.0-rc.2",
+    "@angular/compiler": "^4.0.0-rc.2",
+    "@angular/compiler-cli": "^4.0.0-rc.2",
+    "@angular/core": "^4.0.0-rc.2",
+    "@angular/forms": "^4.0.0-rc.2",
+    "@angular/http": "^4.0.0-rc.2",
+    "@angular/platform-browser": "^4.0.0-rc.2",
+    "@angular/platform-browser-dynamic": "^4.0.0-rc.2",
+    "@angular/platform-server": "^4.0.0-rc.2",
+    "@angular/router": "^4.0.0-rc.2",
+    "@ngtools/webpack": "^1.2.12",
+    "add-asset-html-webpack-plugin": "^1.0.2",
+    "angular2-template-loader": "^0.6.2",
+    "awesome-typescript-loader": "^3.1.2",
+    "bulma": "^0.3.2",
+    "codelyzer": "^3.0.0-beta.3",
+    "compression-webpack-plugin": "^0.3.2",
+    "copy-webpack-plugin": "^4.0.1",
+    "core-js": "^2.4.1",
+    "css-loader": "^0.26.2",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.28.0",
+    "node-sass": "^4.5.0",
+    "raw-loader": "^0.5.1",
+    "rimraf": "^2.6.1",
+    "rxjs": "^5.2.0",
+    "sass-loader": "^6.0.2",
+    "style-loader": "^0.13.2",
+    "to-string-loader": "^1.1.5",
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1",
+    "webpack-dll-bundles-plugin": "^1.0.0-beta.5",
+    "zone.js": "^0.7.7"
+  },
+  "dependencies": {
+    "date-fns": "^1.28.0"
+  }
+}

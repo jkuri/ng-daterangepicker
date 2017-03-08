@@ -68,6 +68,7 @@
     top: 75px
     left: 0
     z-index: 100
+    display: none
 
     &:after
       content: ''
@@ -81,6 +82,9 @@
       border-top: 1px solid $blue
       border-left: 1px solid $blue
       background: $white
+
+    &.is-opened
+      display: block
 
     .calendar-container
       display: inline-block
@@ -120,6 +124,7 @@
           display: block
           float: left
           text-align: center
+          font-weight: bold
 
       .days
         display: inline-block
@@ -134,6 +139,7 @@
           text-align: center
           margin-bottom: 15px
           cursor: pointer
+          font-weight: bold
 
           &.is-within-range
             background: $blue-light

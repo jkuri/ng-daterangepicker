@@ -1,8 +1,8 @@
 <div class="angular-paypal-datepicker">
 
-  <div class="input-section">
+  <div class="input-section" (click)="toggleCalendar($event, 'from')">
     <span class="label-txt">Start</span>
-    <span class="value-txt">07/12/16</span>
+    <span class="value-txt">{{ dateFrom | date:'yMd' }}</span>
     <span class="cal-icon">
       <svg width="94px" height="94px" viewBox="3 3 94 94" version="1.1">
         <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(3.000000, 3.000000)">
@@ -12,9 +12,9 @@
     </span>
   </div>
 
-  <div class="input-section">
+  <div class="input-section" (click)="toggleCalendar($event, 'to')">
     <span class="label-txt">End</span>
-    <span class="value-txt">07/03/17</span>
+    <span class="value-txt">{{ dateTo | date:'yMd' }}</span>
     <span class="cal-icon">
       <svg width="94px" height="94px" viewBox="3 3 94 94" version="1.1">
         <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(3.000000, 3.000000)">
@@ -24,7 +24,7 @@
     </span>
   </div>
 
-  <div class="calendar">
+  <div class="calendar" [class.is-opened]="opened">
     <div class="calendar-container">
       <div class="controls">
         <span class="control-icon" (click)="prevMonth()">

@@ -1,12 +1,21 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as dateFns from 'date-fns';
+
+export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => AngularDateRangePickerComponent),
+  multi: true
+};
 
 @Component({
   selector: 'angular-daterangepicker',
   templateUrl: 'angular-daterangepicker.component.html',
-  styleUrls: ['angular-daterangepicker.sass']
+  styleUrls: ['angular-daterangepicker.sass'],
+  providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
 })
-export class AngularDateRangePickerComponent implements OnInit {
+export class AngularDateRangePickerComponent implements ControlValueAccessor, OnInit {
+  modelValue: string;
   opened: false | 'from' | 'to';
   date: Date;
   dateFrom: Date;
@@ -15,14 +24,39 @@ export class AngularDateRangePickerComponent implements OnInit {
   days: any[];
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
 
+  private onTouchedCallback: () => void = () => { };
+  private onChangeCallback: (_: any) => void = () => { };
+
   constructor(private elementRef: ElementRef) { }
+
+  get value(): string {
+    return this.modelValue;
+  }
+
+  set value(value: string) {
+    if (!value) { return; }
+    this.modelValue = value;
+    this.onChangeCallback(value);
+  }
+
+  writeValue(value: string) {
+    if (!value) { return; }
+    this.modelValue = value;
+  }
+
+  registerOnChange(fn: any) {
+    this.onChangeCallback = fn;
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouchedCallback = fn;
+  }
 
   ngOnInit() {
     this.opened = false;
     this.date = dateFns.startOfDay(new Date());
-    this.selectRange('tw');
     this.initNames();
-    this.generateCalendar();
+    this.selectRange('tw');
   }
 
   initNames(): void {
@@ -70,6 +104,7 @@ export class AngularDateRangePickerComponent implements OnInit {
     }
 
     this.days = prevMonthDays.concat(days);
+    this.value = `${dateFns.format(this.dateFrom, 'DD/MM/YYYY')}-${dateFns.format(this.dateTo, 'DD/MM/YYYY')}`;
   }
 
   toggleCalendar(e: MouseEvent, selection: 'from' | 'to'): void {

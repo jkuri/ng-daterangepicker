@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, ApplicationRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { AppComponent } from './app.component';
 import { AngularDateRangePickerModule } from '../angular-daterangepicker';
 
@@ -16,4 +17,32 @@ import { AngularDateRangePickerModule } from '../angular-daterangepicker';
   ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(public appRef: ApplicationRef) {}
+
+  hmrOnInit(store) {
+    if (!store || !store.state) {
+      return;
+    }
+
+    if ('restoreInputValues' in store) {
+      store.restoreInputValues();
+    }
+
+    this.appRef.tick();
+    delete store.state;
+    delete store.restoreInputValues;
+  }
+
+  hmrOnDestroy(store) {
+    let cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
+    store.disposeOldHosts = createNewHosts(cmpLocation);
+    store.restoreInputValues  = createInputTransfer();
+    removeNgStyles();
+  }
+
+  hmrAfterDestroy(store) {
+    store.disposeOldHosts();
+    delete store.disposeOldHosts;
+  }
+}

@@ -13,22 +13,13 @@
       "es2016",
       "dom"
     ],
-    "outDir": "lib"
+    "outDir": "lib",
+    "typeRoots": [
+      "../node_modules/@types"
+    ]
   },
   "include": [
     "src/**/*.ts"
-  ],
-  "exclude": [
-    "server",
-    "src/main.aot.ts",
-    "scripts",
-    "src/polyfills.ts",
-    "src/vendor.ts",
-    "src/test.ts",
-    "src/app/app.module.universal.ts",
-    "src/testing/**/*",
-    "src/**/*.spec.ts",
-    "src/app/shared/services/translation/universal/translate-universal-loader.ts"
   ],
   "angularCompilerOptions": {
     "genDir": "./src/ngfactory",

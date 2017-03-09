@@ -1,28 +1,28 @@
 {
-  "name": "angular-paypal-datepicker",
+  "name": "angular-daterangepicker",
   "version": "0.0.0",
   "description": "Angular PayPal Datepicker",
   "scripts": {
-    "webpack": "npm run clean && webpack --config config/webpack.config.js --progress --bail",
     "serve": "webpack-dev-server --config config/webpack.config.dev.js",
+    "build:dev": "npm run clean && webpack --config config/webpack.config.dev.js --progress --bail",
+    "build:prod": "npm run clean && webpack --config config/webpack.config.prod.js --progress --bail",
     "start": "npm run serve",
-    "roll": "npm run webpack",
-    "build": "npm run roll",
     "clean": "rimraf dist/ src/ngfactory lib",
-    "lint": "npm run tslint \"src/**/*.ts\"",
-    "tslint": "tslint",
     "test": "karma start config/karma.conf.js",
     "e2e:live": "npm run e2e -- --elementExplorer",
     "e2e": "npm run protractor ./config/protractor.conf.js",
     "pree2e": "npm run webdriver:update -- --standalone",
     "protractor": "protractor",
+    "lint": "npm run tslint \"src/**/*.ts\"",
+    "ci": "npm run lint && npm test && npm run e2e",
     "webdriver-manager": "webdriver-manager",
     "webdriver:start": "npm run webdriver-manager start",
-    "webdriver:update": "npm run webdriver-manager update"
+    "webdriver:update": "npm run webdriver-manager update",
+    "tslint": "tslint"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jkuri/angular-paypal-datepicker.git"
+    "url": "git+https://github.com/jkuri/angular-daterangepicker.git"
   },
   "keywords": [
     "Angular",
@@ -35,9 +35,9 @@
   "author": "Jan Kuri <jkuri88@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jkuri/angular-paypal-datepicker/issues"
+    "url": "https://github.com/jkuri/angular-daterangepicker/issues"
   },
-  "homepage": "https://github.com/jkuri/angular-paypal-datepicker#readme",
+  "homepage": "https://github.com/jkuri/angular-daterangepicker#readme",
   "devDependencies": {
     "@angular/animations": "^4.0.0-rc.2",
     "@angular/common": "^4.0.0-rc.2",
@@ -67,11 +67,13 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
+    "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "jasmine-spec-reporter": "^3.2.0",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage-istanbul-reporter": "^0.3.0",
     "karma-jasmine": "^1.1.0",
     "karma-spec-reporter": "0.0.30",
     "karma-webpack": "^2.0.2",

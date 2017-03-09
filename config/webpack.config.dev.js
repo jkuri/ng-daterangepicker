@@ -15,7 +15,6 @@ const sass = new extract({
 });
 
 module.exports = {
-  cache: true,
   context: path.resolve(__dirname, '..'),
   resolve: { extensions: ['.ts', '.js', '.json'] },
   entry: {
@@ -23,13 +22,13 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'js/[name].bundle.js',
-    sourceMapFilename: 'js/[name].bundle.map',
-    chunkFilename: 'js/[id].chunk.js',
+    filename: '[name].bundle.js',
+    sourceMapFilename: '[name].bundle.map',
+    chunkFilename: '[id].chunk.js',
     library: 'ac_[name]',
     libraryTarget: 'var'
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   plugins: [
     new html({ template: './src/index.html' }),
     new copy([{ context: './public', from: '**/*' }]),
@@ -48,19 +47,20 @@ module.exports = {
           '@angular/common', '@angular/forms', '@angular/http', '@angular/router', 'rxjs'
         ]
       },
-      dllDir: './dist/js',
+      dllDir: path.resolve(__dirname, '../dist'),
       webpackConfig: { devtool: 'cheap-module-source-map', plugins: [] }
     }),
+    new webpack.HotModuleReplacementPlugin(),
     new assethtml([
-      { filepath: path.resolve(__dirname, `../dist/js/${dll.resolveFile('polyfills')}`) },
-      { filepath: path.resolve(__dirname, `../dist/js/${dll.resolveFile('vendor')}`) }
-    ]),
-    new webpack.HotModuleReplacementPlugin()
+      { filepath: path.resolve(__dirname, `../dist/${dll.resolveFile('polyfills')}`) },
+      { filepath: path.resolve(__dirname, `../dist/${dll.resolveFile('vendor')}`) }
+    ])
   ],
   module: {
     rules: [
       { test: /\.ts$/, use: [ { loader: '@angularclass/hmr-loader' }, { loader: 'awesome-typescript-loader', options: { configFileName: 'config/tsconfig.dev.json' } }, { loader: 'angular2-template-loader' } ], exclude: [/\.aot\.ts$/] },
-      { test: /\.css$/i, loader: extract.extract({ use: 'css-loader' }) },
+      { test: /\.css$/, use: ['style-loader', 'css-loader'], exclude: [path.resolve(__dirname, '../src/app')] },
+      { test: /\.css$/, use: ['to-string-loader', 'css-loader'], exclude: [path.resolve(__dirname, '../src/styles')] },
       { test: /\.scss$|\.sass$/, use: ['style-loader', 'css-loader', 'sass-loader'], include: [path.resolve(__dirname, '../src/styles') ] },
       { test: /\.scss$|\.sass$/, use: ['to-string-loader', 'css-loader', 'sass-loader'], exclude: [path.resolve(__dirname, '../src/styles')] },
       { test: /\.html$/, loader: 'raw-loader' },
@@ -70,6 +70,7 @@ module.exports = {
     ]
   },
   devServer: {
+    compress: true,
     historyApiFallback: true,
     port: 8000,
     open: true,

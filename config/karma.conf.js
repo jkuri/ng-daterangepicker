@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = function (config) {
   let testWebpackConfig = require('./webpack.config.test.js')({ env: 'test' });
 
@@ -21,7 +23,8 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-webpack'),
       require('./karma-sass-preprocessor'),
-      require('karma-spec-reporter')
+      require('karma-spec-reporter'),
+      require('karma-coverage-istanbul-reporter')
     ],
     preprocessors: { './config/spec-bundle.js': ['webpack'], './src/styles/app.sass': ['sass'] },
     webpack: testWebpackConfig,
@@ -34,7 +37,7 @@ module.exports = function (config) {
         chunks: false
       }
     },
-    reporters: ['spec'],
+    reporters: ['spec', 'coverage-istanbul'],
     specReporter: {
       maxLogLines: 5,
       suppressErrorSummary: false,
@@ -43,11 +46,35 @@ module.exports = function (config) {
       suppressSkipped: true,
       showSpecTiming: true
     },
+    coverageIstanbulReporter: {
+      reports: ['html', 'lcovonly', 'text-summary'],
+      dir: path.resolve(__dirname, '../coverage'),
+      fixWebpackSourcePaths: true,
+      'report-config': {
+        html: {
+          subdir: 'html'
+        }
+      }
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_ERROR,
     autoWatch: false,
-    browsers: ['Chrome'],
+    browsers: ['ChromeDesktop', 'ChromeTablet', 'ChromeMobile'],
+    customLaunchers: {
+      ChromeMobile: {
+        base: 'Chrome',
+        flags: ['--window-size=400,600', '--no-sandbox']
+      },
+      ChromeTablet: {
+        base: 'Chrome',
+        flags: ['--window-size=850,768', '--no-sandbox']
+      },
+      ChromeDesktop: {
+        base: 'Chrome',
+        flags: ['--window-size=1050,800', '--no-sandbox']
+      }
+    },
     mime: { 'text/x-typescript': ['ts', 'tsx'] },
     singleRun: true,
     concurrency: 1,

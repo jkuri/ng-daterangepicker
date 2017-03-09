@@ -3,8 +3,13 @@
     <div class="container">
       <div class="columns">
         <div class="column is-4 is-offset-4">
+          <div class="is-fullwidth">
+            <div class="notification is-info has-text-centered">
+              Value: <b>{{ value }}</b>
+            </div>
+          </div>
           <div class="is-fullwidth has-text-centered">
-            <angular-daterangepicker></angular-daterangepicker>
+            <angular-daterangepicker [(ngModel)]="value"></angular-daterangepicker>
           </div>
         </div>
       </div>

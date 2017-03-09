@@ -28,7 +28,7 @@ function createSASSPreprocessor(args, config = {}, logger, helper) {
 
     log.debug('Processing "%s".', file.originalPath);
 
-    file.path = file.originalPath.replace(/\.sass$/, '.css');
+    file.path = file.originalPath.replace(/\.sass$|\.scss/, '.css');
 
     opts = {};
 

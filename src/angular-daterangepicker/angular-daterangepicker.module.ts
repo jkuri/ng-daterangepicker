@@ -6,6 +6,6 @@ import { AngularDateRangePickerComponent } from './angular-daterangepicker.compo
 @NgModule({
   declarations: [ AngularDateRangePickerComponent ],
   imports: [ CommonModule, FormsModule ],
-  exports: [ AngularDateRangePickerComponent ]
+  exports: [ AngularDateRangePickerComponent, CommonModule, FormsModule ]
 })
 export class AngularDateRangePickerModule { }

@@ -5,10 +5,7 @@ const path = require('path');
 const webpack = require('webpack');
 const compression = require('compression-webpack-plugin');
 const extract = require('extract-text-webpack-plugin');
-
-const sass = new extract({
-  filename: "[name].[contenthash].css"
-});
+const sass = new extract({ filename: "[name].css" });
 
 module.exports = {
   context: path.resolve(__dirname, '..'),
@@ -33,7 +30,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.css$/i, loader: extract.extract({ use: 'css-loader' }) },
-      { test: /\.scss$|\.sass$/, loader: sass.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] }), exclude: [path.resolve(__dirname, '../src/app')] },
+      { test: /\.scss$|\.sass$/, loader: sass.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] }), exclude: [path.resolve(__dirname, '../src/app/styles'), path.resolve(__dirname, '../src/angular-daterangepicker')] },
       { test: /\.scss$|\.sass$/, use: ['to-string-loader', 'css-loader', 'sass-loader'], exclude: [path.resolve(__dirname, '../src/styles')] },
       { test: /\.html$/, loader: 'raw-loader' },
       { test: /\.ts$/, loader: '@ngtools/webpack' },

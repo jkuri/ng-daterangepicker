@@ -4,3 +4,4 @@ dist/
 src/ngfactory
 lib/
 coverage/
+aot/

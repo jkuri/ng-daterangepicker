@@ -4,3 +4,9 @@ dist/
 src/ngfactory
 lib/
 coverage/
+aot/
+**/*.js
+**/*.d.ts
+**/*.metadata.json
+
+!bundles/**/*.js

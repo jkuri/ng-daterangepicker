@@ -6,6 +6,19 @@ export interface AngularDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
 }
 
+export interface IDay {
+  date: Date;
+  day: number;
+  weekday: number;
+  today: boolean;
+  firstMonthDay: boolean;
+  lastMonthDay: boolean;
+  visible: boolean;
+  from: boolean;
+  to: boolean;
+  isWithinRange: boolean;
+}
+
 export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => AngularDateRangePickerComponent),
@@ -27,7 +40,7 @@ export class AngularDateRangePickerComponent implements ControlValueAccessor, On
   dateFrom: Date;
   dateTo: Date;
   dayNames: string[];
-  days: any[];
+  days: IDay[];
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
 
   private onTouchedCallback: () => void = () => { };
@@ -79,7 +92,7 @@ export class AngularDateRangePickerComponent implements ControlValueAccessor, On
     let start: Date = dateFns.startOfMonth(this.date);
     let end: Date = dateFns.endOfMonth(this.date);
 
-    let days = dateFns.eachDay(start, end).map(d => {
+    let days: IDay[] = dateFns.eachDay(start, end).map(d => {
       return {
         date: d,
         day: dateFns.getDate(d),
@@ -95,7 +108,7 @@ export class AngularDateRangePickerComponent implements ControlValueAccessor, On
     });
 
     let prevMonthDayNum = dateFns.getDay(start) - 1;
-    let prevMonthDays = [];
+    let prevMonthDays: IDay[] = [];
     if (prevMonthDayNum > 0) {
       prevMonthDays = Array.from(Array(prevMonthDayNum).keys()).map(i => {
         let d = dateFns.subDays(start, prevMonthDayNum - i);

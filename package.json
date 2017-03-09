@@ -1,11 +1,15 @@
 {
   "name": "angular-daterangepicker",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Angular PayPal Datepicker",
+  "main": "bundles/angular-daterangepicker.umd.js",
+  "module": "index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "serve": "webpack-dev-server --config config/webpack.config.dev.js",
     "build:dev": "npm run clean && webpack --config config/webpack.config.dev.js --progress --bail",
     "build:prod": "npm run clean && webpack --config config/webpack.config.prod.js --progress --bail",
+    "build:dist": "ngc -p tsconfig.dist.json && webpack --config config/webpack.config.dist.js --progress --bail",
     "start": "npm run serve",
     "clean": "rimraf dist/ src/ngfactory lib",
     "test": "karma start config/karma.conf.js",
@@ -18,7 +22,8 @@
     "webdriver-manager": "webdriver-manager",
     "webdriver:start": "npm run webdriver-manager start",
     "webdriver:update": "npm run webdriver-manager update",
-    "tslint": "tslint"
+    "tslint": "tslint",
+    "prepublish": "npm run build:dist"
   },
   "repository": {
     "type": "git",

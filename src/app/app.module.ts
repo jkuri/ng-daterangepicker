@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AngularPayPalDatepickerComponent } from './components/angular-paypal-datepicker';
+import { AngularDateRangePickerModule } from '../angular-daterangepicker';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AngularPayPalDatepickerComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    CommonModule
+    CommonModule,
+    AngularDateRangePickerModule
   ],
   bootstrap: [ AppComponent ]
 })

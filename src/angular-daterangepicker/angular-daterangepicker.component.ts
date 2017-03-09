@@ -2,11 +2,11 @@ import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import * as dateFns from 'date-fns';
 
 @Component({
-  selector: 'angular-paypal-datepicker',
-  templateUrl: 'angular-paypal-datepicker.component.html',
-  styleUrls: ['angular-paypal-datepicker.sass']
+  selector: 'angular-daterangepicker',
+  templateUrl: 'angular-daterangepicker.component.html',
+  styleUrls: ['angular-daterangepicker.sass']
 })
-export class AngularPayPalDatepickerComponent implements OnInit {
+export class AngularDateRangePickerComponent implements OnInit {
   opened: false | 'from' | 'to';
   date: Date;
   dateFrom: Date;

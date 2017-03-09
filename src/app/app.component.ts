@@ -6,6 +6,7 @@ import { AngularDateRangePickerOptions } from '../angular-daterangepicker';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  value: string;
   options: AngularDateRangePickerOptions;
 
   ngOnInit() {

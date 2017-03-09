@@ -5,6 +5,8 @@ const path = require('path');
 const webpack = require('webpack');
 const compression = require('compression-webpack-plugin');
 const extract = require('extract-text-webpack-plugin');
+const extractCss = new extract('[name].css');
+const extractSass = new extract('[name].css');
 
 module.exports = {
   context: path.resolve(__dirname, '..'),
@@ -24,13 +26,14 @@ module.exports = {
     new copy([{ context: './public', from: '**/*' }]),
     new webpack.optimize.UglifyJsPlugin({ mangle: { screw_ie8: true }, compress: { screw_ie8: true, warnings: false } }),
     new compression({ asset: "[path].gz[query]", algorithm: "gzip", test: /\.js$|\.html$/, threshold: 10240, minRatio: 0.8 }),
-    new extract('[name].css')
+    extractCss,
+    extractSass
   ],
   module: {
     rules: [
-      { test: /\.css$/, use: extract.extract({ fallback: 'style-loader', use: 'css-loader' }), include: [path.resolve(__dirname, '../src/styles')] },
+      { test: /\.css$/, use: extractCss.extract({ fallback: 'style-loader', use: 'css-loader' }), include: [path.resolve(__dirname, '../src/styles'), path.resolve(__dirname, '../src/angular-daterangepicker')] },
       { test: /\.css$/, use: ['to-string-loader', 'css-loader'], exclude: [path.resolve(__dirname, '../src/styles')] },
-      { test: /\.scss$|\.sass$/, loader: extract.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] }), exclude: [path.resolve(__dirname, '../src/app')] },
+      { test: /\.scss$|\.sass$/, loader: extractSass.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] }), exclude: [path.resolve(__dirname, '../src/app'), path.resolve(__dirname, '../src/angular-daterangepicker')] },
       { test: /\.scss$|\.sass$/, use: ['to-string-loader', 'css-loader', 'sass-loader'], exclude: [path.resolve(__dirname, '../src/styles')] },
       { test: /\.html$/, loader: 'raw-loader' },
       { test: /\.ts$/, loader: '@ngtools/webpack' },

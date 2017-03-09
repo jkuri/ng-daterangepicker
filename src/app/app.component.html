@@ -1,15 +1,43 @@
 <div class="hero is-medium">
   <div class="hero-body">
     <div class="container">
-      <div class="columns">
+      <div class="columns is-multiline">
         <div class="column is-4 is-offset-4">
           <div class="is-fullwidth">
-            <div class="notification is-info has-text-centered">
-              Value: <b>{{ value }}</b>
+            <article class="message is-info has-text-centered">
+              <div class="message-header">
+                Model binding
+                <button class="delete"></button>
+              </div>
+              <div class="message-body">
+                Value: {{ value }}
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="column is-4 is-offset-4">
+          <div class="centered">
+            <div class="control is-horizontal">
+              <div class="control-label">
+                <label class="label">Theme</label>
+              </div>
+              <span class="select">
+                <select [(ngModel)]="options.theme">
+                  <option>default</option>
+                  <option>green</option>
+                  <option>teal</option>
+                  <option>cyan</option>
+                  <option>grape</option>
+                  <option>red</option>
+                  <option>gray</option>
+                </select>
+              </span>
             </div>
           </div>
+        </div>
+        <div class="column is-4 is-offset-4">
           <div class="is-fullwidth has-text-centered">
-            <angular-daterangepicker [(ngModel)]="value"></angular-daterangepicker>
+            <angular-daterangepicker [(ngModel)]="value" [options]="options"></angular-daterangepicker>
           </div>
         </div>
       </div>

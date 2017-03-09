@@ -1,4 +1,11 @@
-<div class="angular-daterangepicker theme-red" [class.is-active]="!!opened">
+<div class="angular-daterangepicker"
+     [ngClass]="{ 'is-active': !!opened,
+                  'theme-green': options.theme === 'green',
+                  'theme-teal': options.theme === 'teal',
+                  'theme-cyan': options.theme === 'cyan',
+                  'theme-grape': options.theme === 'grape',
+                  'theme-red': options.theme === 'red',
+                  'theme-gray': options.theme === 'gray' }">
 
   <div class="input-section" (click)="toggleCalendar($event, 'from')">
     <span class="label-txt">Start</span>

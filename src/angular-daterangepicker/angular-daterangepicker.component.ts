@@ -1,6 +1,10 @@
-import { Component, OnInit, HostListener, ElementRef, forwardRef } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChanges, SimpleChange } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as dateFns from 'date-fns';
+
+export interface AngularDateRangePickerOptions {
+  theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
+}
 
 export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -15,6 +19,8 @@ export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
 })
 export class AngularDateRangePickerComponent implements ControlValueAccessor, OnInit {
+  @Input() options: AngularDateRangePickerOptions;
+
   modelValue: string;
   opened: false | 'from' | 'to';
   date: Date;
@@ -55,8 +61,13 @@ export class AngularDateRangePickerComponent implements ControlValueAccessor, On
   ngOnInit() {
     this.opened = false;
     this.date = dateFns.startOfDay(new Date());
+    this.options = this.options || { theme: 'default' };
     this.initNames();
     this.selectRange('tw');
+  }
+
+  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
+    this.options = this.options || { theme: 'default' };
   }
 
   initNames(): void {

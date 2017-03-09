@@ -9,4 +9,6 @@ aot/
 **/*.d.ts
 **/*.metadata.json
 
+!config/**/*.js
+!config/**/*.json
 !bundles/**/*.js

@@ -31,9 +31,9 @@ module.exports = {
   ],
   module: {
     rules: [
-      { test: /\.css$/, use: extractCss.extract({ fallback: 'style-loader', use: 'css-loader' }), include: [path.resolve(__dirname, '../src/styles'), path.resolve(__dirname, '../src/angular-daterangepicker')] },
+      { test: /\.css$/, use: extractCss.extract({ fallback: 'style-loader', use: 'css-loader' }), include: [path.resolve(__dirname, '../src/styles'), path.resolve(__dirname, '../src/ng-daterangepicker')] },
       { test: /\.css$/, use: ['to-string-loader', 'css-loader'], exclude: [path.resolve(__dirname, '../src/styles')] },
-      { test: /\.scss$|\.sass$/, loader: extractSass.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] }), exclude: [path.resolve(__dirname, '../src/app'), path.resolve(__dirname, '../src/angular-daterangepicker')] },
+      { test: /\.scss$|\.sass$/, loader: extractSass.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] }), exclude: [path.resolve(__dirname, '../src/app'), path.resolve(__dirname, '../src/ng-daterangepicker')] },
       { test: /\.scss$|\.sass$/, use: ['to-string-loader', 'css-loader', 'sass-loader'], exclude: [path.resolve(__dirname, '../src/styles')] },
       { test: /\.html$/, loader: 'raw-loader' },
       { test: /\.ts$/, loader: '@ngtools/webpack' },

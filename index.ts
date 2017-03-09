@@ -1,1 +1,1 @@
-export * from './src/angular-daterangepicker';
+export * from './src/ng-daterangepicker';

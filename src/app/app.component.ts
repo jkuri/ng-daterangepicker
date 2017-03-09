@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularDateRangePickerOptions } from '../angular-daterangepicker';
+import { NgDateRangePickerOptions } from '../ng-daterangepicker';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { AngularDateRangePickerOptions } from '../angular-daterangepicker';
 })
 export class AppComponent {
   value: string;
-  options: AngularDateRangePickerOptions;
+  options: NgDateRangePickerOptions;
 
   ngOnInit() {
     this.options = { theme: 'default' };

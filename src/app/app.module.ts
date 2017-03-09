@@ -4,7 +4,7 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { AppComponent } from './app.component';
-import { AngularDateRangePickerModule } from '../angular-daterangepicker';
+import { NgDateRangePickerModule } from '../ng-daterangepicker';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { AngularDateRangePickerModule } from '../angular-daterangepicker';
   imports: [
     BrowserModule,
     CommonModule,
-    AngularDateRangePickerModule
+    NgDateRangePickerModule
   ],
   bootstrap: [ AppComponent ]
 })

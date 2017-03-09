@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChang
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as dateFns from 'date-fns';
 
-export interface AngularDateRangePickerOptions {
+export interface NgDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
 }
 
@@ -21,18 +21,18 @@ export interface IDay {
 
 export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => AngularDateRangePickerComponent),
+  useExisting: forwardRef(() => NgDateRangePickerComponent),
   multi: true
 };
 
 @Component({
-  selector: 'angular-daterangepicker',
-  templateUrl: 'angular-daterangepicker.component.html',
-  styleUrls: ['angular-daterangepicker.sass'],
+  selector: 'ng-daterangepicker',
+  templateUrl: 'ng-daterangepicker.component.html',
+  styleUrls: ['ng-daterangepicker.sass'],
   providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
 })
-export class AngularDateRangePickerComponent implements ControlValueAccessor, OnInit {
-  @Input() options: AngularDateRangePickerOptions;
+export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit {
+  @Input() options: NgDateRangePickerOptions;
 
   modelValue: string;
   opened: false | 'from' | 'to';

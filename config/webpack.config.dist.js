@@ -7,13 +7,13 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
 module.exports = {
   resolve: { extensions: ['.ts', '.js'] },
-  entry: path.join(root, 'angular-daterangepicker.ts'),
+  entry: path.join(root, 'ng-daterangepicker.ts'),
   output: {
     path: path.join(root, 'bundles'),
     publicPath: '/',
-    filename: 'angular-daterangepicker.umd.js',
+    filename: 'ng-daterangepicker.umd.js',
     libraryTarget: 'umd',
-    library: 'angular-daterangepicker'
+    library: 'ng-daterangepicker'
   },
   externals: [/^\@angular\//, /^rxjs\//, /^date-fns/],
   module: {

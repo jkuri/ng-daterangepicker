@@ -149,21 +149,30 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit 
     if (this.opened === 'from' && dateFns.isAfter(selectedDate, this.dateTo)) {
       this.dateTo = selectedDate;
     }
+ 
 
     if ((this.opened === 'to' && dateFns.isBefore(selectedDate, this.dateFrom))) {
       this.dateFrom = selectedDate;
     }
 
-    if (this.opened === 'from') {
-      this.dateFrom = selectedDate;
-      this.opened = 'to';
-    } else if (this.opened === 'to') {
+   if (dateFns.isAfter(selectedDate, this.dateTo)) {
+      this.dateFrom = this.dateTo;
       this.dateTo = selectedDate;
-      this.opened = 'from';
-    }
+   }
 
-    this.generateCalendar();
-  }
+   if (dateFns.isBefore(selectedDate, this.dateFrom)) {
+      this.dateTo = this.dateFrom;
+      this.dateFrom = selectedDate;
+   }
+
+   if (dateFns.isBefore(selectedDate, this.dateTo) && dateFns.isAfter(selectedDate, this.dateFrom)) {
+     this.opened === 'from' ? ( this.dateFrom = selectedDate, this.opened = 'to' ) : (this.dateTo = selectedDate, this.opened = 'from' ); 
+   }
+
+  this.generateCalendar();
+
+    
+}
 
   prevMonth(): void {
     this.date = dateFns.subMonths(this.date, 1);

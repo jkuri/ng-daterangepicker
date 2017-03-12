@@ -4,6 +4,7 @@ import * as dateFns from 'date-fns';
 
 export interface NgDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
+  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
 }
 
 export interface IDay {
@@ -74,13 +75,13 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit 
   ngOnInit() {
     this.opened = false;
     this.date = dateFns.startOfDay(new Date());
-    this.options = this.options || { theme: 'default' };
+    this.options = this.options || { theme: 'default', range: 'tm' };
     this.initNames();
-    this.selectRange('tw');
+    this.selectRange(this.options.range);
   }
 
   ngOnChanges(changes: {[propName: string]: SimpleChange}) {
-    this.options = this.options || { theme: 'default' };
+    this.options = this.options || { theme: 'default', range: 'tm' };
   }
 
   initNames(): void {

@@ -141,12 +141,12 @@ var NgDateRangePickerComponent = (function () {
     NgDateRangePickerComponent.prototype.ngOnInit = function () {
         this.opened = false;
         this.date = __WEBPACK_IMPORTED_MODULE_2_date_fns__["startOfDay"](new Date());
-        this.options = this.options || { theme: 'default' };
+        this.options = this.options || { theme: 'default', range: 'tm' };
         this.initNames();
-        this.selectRange('tw');
+        this.selectRange(this.options.range);
     };
     NgDateRangePickerComponent.prototype.ngOnChanges = function (changes) {
-        this.options = this.options || { theme: 'default' };
+        this.options = this.options || { theme: 'default', range: 'tm' };
     };
     NgDateRangePickerComponent.prototype.initNames = function () {
         this.dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];

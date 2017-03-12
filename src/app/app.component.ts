@@ -10,6 +10,6 @@ export class AppComponent {
   options: NgDateRangePickerOptions;
 
   ngOnInit() {
-    this.options = { theme: 'default' };
+    this.options = { theme: 'default', range: 'tm' };
   }
 }

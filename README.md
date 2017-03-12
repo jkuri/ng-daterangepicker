@@ -59,6 +59,7 @@ export class AppComponent {
 ```ts
 export interface NgDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
+  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
 }
 ```
 

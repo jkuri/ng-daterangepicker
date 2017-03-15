@@ -212,7 +212,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit 
 
   @HostListener('document:click', ['$event'])
   handleBlurClick(e: MouseEvent) {
-    var target = e.srcElement || e.target;
+    let target = e.srcElement || e.target;
     if (!this.elementRef.nativeElement.contains(e.target) && !(<Element>target).classList.contains('day-num')) {
       this.opened = false;
     }

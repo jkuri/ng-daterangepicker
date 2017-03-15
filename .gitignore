@@ -5,10 +5,10 @@ src/ngfactory
 lib/
 coverage/
 aot/
+bundles/
 **/*.js
 **/*.d.ts
 **/*.metadata.json
 
 !config/**/*.js
 !config/**/*.json
-!bundles/**/*.js

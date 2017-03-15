@@ -8,7 +8,7 @@ aot/
 **/*.js
 **/*.d.ts
 **/*.metadata.json
-
+bundles
 !config/**/*.js
 !config/**/*.json
 !bundles/**/*.js

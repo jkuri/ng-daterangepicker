@@ -8,8 +8,8 @@
                   'theme-gray': options.theme === 'gray' }">
 
   <div class="input-section" (click)="toggleCalendar($event, 'from')">
-    <span class="label-txt">Start</span>
-    <span class="value-txt">{{ dateFrom | date:'yMd' }}</span>
+    <span class="label-txt">{{options.presetNames[6]}}</span>
+    <span class="value-txt">{{ dateFrom | date:options.dateFormat }}</span>
     <span class="cal-icon">
       <svg width="94px" height="94px" viewBox="3 3 94 94" version="1.1">
         <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(3.000000, 3.000000)">
@@ -20,8 +20,8 @@
   </div>
 
   <div class="input-section" (click)="toggleCalendar($event, 'to')">
-    <span class="label-txt">End</span>
-    <span class="value-txt">{{ dateTo | date:'yMd' }}</span>
+    <span class="label-txt">{{options.presetNames[7]}}</span>
+    <span class="value-txt">{{ dateTo | date:options.dateFormat }}</span>
     <span class="cal-icon">
       <svg width="94px" height="94px" viewBox="3 3 94 94" version="1.1">
         <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(3.000000, 3.000000)">
@@ -67,12 +67,12 @@
     </div>
     <div class="side-container">
       <div class="side-container-buttons">
-        <button type="button" class="side-button" (click)="selectRange('tm')" [class.is-active]="range === 'tm'">This Month</button>
-        <button type="button" class="side-button" (click)="selectRange('lm')" [class.is-active]="range === 'lm'">Last Month</button>
-        <button type="button" class="side-button" (click)="selectRange('tw')" [class.is-active]="range === 'tw'">This Week</button>
-        <button type="button" class="side-button" (click)="selectRange('lw')" [class.is-active]="range === 'lw'">Last Week</button>
-        <button type="button" class="side-button" (click)="selectRange('ty')" [class.is-active]="range === 'ty'">This Year</button>
-        <button type="button" class="side-button" (click)="selectRange('ly')" [class.is-active]="range === 'ly'">Last Year</button>
+        <button type="button" class="side-button" (click)="selectRange('tm')" [class.is-active]="range === 'tm'">{{options.presetNames[0]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('lm')" [class.is-active]="range === 'lm'">{{options.presetNames[1]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('tw')" [class.is-active]="range === 'tw'">{{options.presetNames[2]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('lw')" [class.is-active]="range === 'lw'">{{options.presetNames[3]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('ty')" [class.is-active]="range === 'ty'">{{options.presetNames[4]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('ly')" [class.is-active]="range === 'ly'">{{options.presetNames[5]}}</button>
       </div>
       <span class="close-icon" (click)="closeCalendar($event)">
         <svg width="20px" height="20px" viewBox="47 44 20 20" version="1.1">

@@ -48,6 +48,15 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   dayNames: string[];
   days: IDay[];
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
+  defaultOptions: NgDateRangePickerOptions = {
+    theme: 'default',
+    range: 'tm',
+    dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
+    dateFormat: 'yMd',
+    outputFormat: 'DD/MM/YYYY',
+    startOfWeek: 0
+  }
 
   private onTouchedCallback: () => void = () => { };
   private onChangeCallback: (_: any) => void = () => { };
@@ -80,29 +89,13 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   ngOnInit() {
     this.opened = false;
     this.date = dateFns.startOfDay(new Date());
-    this.options = this.options || {
-        theme: 'default',
-        range: 'tm',
-        dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
-        dateFormat: 'yMd',
-        outputFormat: 'DD/MM/YYYY',
-        startOfWeek: 0
-      };
+    this.options = this.options || this.defaultOptions;
     this.initNames();
     this.selectRange(this.options.range);
   }
 
   ngOnChanges(changes: {[propName: string]: SimpleChange}) {
-    this.options = this.options || {
-        theme: 'default',
-        range: 'tm',
-        dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
-        dateFormat: 'yMd',
-        outputFormat: 'DD/MM/YYYY',
-        startOfWeek: 0
-      };
+    this.options = this.options || this.defaultOptions;
   }
 
   initNames(): void {

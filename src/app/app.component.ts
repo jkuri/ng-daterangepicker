@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { NgDateRangePickerOptions } from '../ng-daterangepicker';
+import { NgDateRangePickerOptions, NgDateRangePickerOutput } from '../ng-daterangepicker';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit  {
-  value: string;
+  value: NgDateRangePickerOutput = {
+    from: '',
+    to: ''
+  };
   options: NgDateRangePickerOptions;
 
   ngOnInit() {
     this.options = {
       theme: 'default',
-      range: 'tm',
+      range: 'l7d',
       dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
       dateFormat: 'yMd',

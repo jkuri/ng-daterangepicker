@@ -5,6 +5,11 @@ import * as dateFns from 'date-fns';
 export interface NgDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
+  dayNames: string[];
+  presetNames: string[];
+  dateFormat: string;
+  outputFormat: string;
+  startOfWeek: number;
 }
 
 export interface IDay {
@@ -32,7 +37,7 @@ export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   styleUrls: ['ng-daterangepicker.sass'],
   providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
 })
-export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit {
+export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() options: NgDateRangePickerOptions;
 
   modelValue: string;
@@ -43,6 +48,15 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit 
   dayNames: string[];
   days: IDay[];
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
+  defaultOptions: NgDateRangePickerOptions = {
+    theme: 'default',
+    range: 'tm',
+    dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
+    dateFormat: 'yMd',
+    outputFormat: 'DD/MM/YYYY',
+    startOfWeek: 0
+  }
 
   private onTouchedCallback: () => void = () => { };
   private onChangeCallback: (_: any) => void = () => { };
@@ -75,17 +89,17 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit 
   ngOnInit() {
     this.opened = false;
     this.date = dateFns.startOfDay(new Date());
-    this.options = this.options || { theme: 'default', range: 'tm' };
+    this.options = this.options || this.defaultOptions;
     this.initNames();
     this.selectRange(this.options.range);
   }
 
   ngOnChanges(changes: {[propName: string]: SimpleChange}) {
-    this.options = this.options || { theme: 'default', range: 'tm' };
+    this.options = this.options || this.defaultOptions;
   }
 
   initNames(): void {
-    this.dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    this.dayNames = this.options.dayNames;
   }
 
   generateCalendar(): void {
@@ -129,7 +143,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit 
     }
 
     this.days = prevMonthDays.concat(days);
-    this.value = `${dateFns.format(this.dateFrom, 'DD/MM/YYYY')}-${dateFns.format(this.dateTo, 'DD/MM/YYYY')}`;
+    this.value = `${dateFns.format(this.dateFrom, this.options.outputFormat)}-${dateFns.format(this.dateTo, this.options.outputFormat)}`;
   }
 
   toggleCalendar(e: MouseEvent, selection: 'from' | 'to'): void {
@@ -148,7 +162,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit 
     e.preventDefault();
     let selectedDate: Date = this.days[index].date;
     if ((this.opened === 'from' && dateFns.isAfter(selectedDate, this.dateTo)) ||
-        (this.opened === 'to' && dateFns.isBefore(selectedDate, this.dateFrom))) {
+      (this.opened === 'to' && dateFns.isBefore(selectedDate, this.dateFrom))) {
       return;
     }
 
@@ -188,12 +202,12 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit 
         break;
       case 'lw':
         today = dateFns.subWeeks(today, 1);
-        this.dateFrom = dateFns.startOfWeek(today);
-        this.dateTo = dateFns.endOfWeek(today);
+        this.dateFrom = dateFns.startOfWeek(today, {weekStartsOn: this.options.startOfWeek});
+        this.dateTo = dateFns.endOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         break;
       case 'tw':
-        this.dateFrom = dateFns.startOfWeek(today);
-        this.dateTo = dateFns.endOfWeek(today);
+        this.dateFrom = dateFns.startOfWeek(today, {weekStartsOn: this.options.startOfWeek});
+        this.dateTo = dateFns.endOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         break;
       case 'ty':
         this.dateFrom = dateFns.startOfYear(today);

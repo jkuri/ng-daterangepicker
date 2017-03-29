@@ -171,29 +171,19 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     e.preventDefault();
     let selectedDate: Date = this.days[index].date;
 
-    if (this.opened === 'from' && dateFns.isAfter(selectedDate, this.dateTo)) {
-      this.dateTo = selectedDate;
-    }
-
-    if ((this.opened === 'to' && dateFns.isBefore(selectedDate, this.dateFrom))) {
-      this.dateFrom = selectedDate;
-    }
-
-    if (dateFns.isAfter(selectedDate, this.dateTo)) {
-      this.dateFrom = this.dateTo;
-      this.dateTo = selectedDate;
-    }
-
-    if (dateFns.isBefore(selectedDate, this.dateFrom)) {
-      this.dateTo = this.dateFrom;
-      this.dateFrom = selectedDate;
-    }
-
-    if (dateFns.isBefore(selectedDate, this.dateTo) && dateFns.isAfter(selectedDate, this.dateFrom)) {
-      if (this.opened === 'from' ) {
+    if (this.opened === 'from') {
+      if (dateFns.isAfter(selectedDate, this.dateTo)) {
+        this.dateTo = selectedDate;
+        this.opened = 'from';
+      } else {
         this.dateFrom = selectedDate;
         this.opened = 'to';
-      } else {
+      }
+    } else if (this.opened === 'to') {
+      if (dateFns.isBefore(selectedDate, this.dateFrom)) {
+        this.dateFrom = selectedDate;
+        this.opened = 'to';
+      } else if (this.opened === 'to') {
         this.dateTo = selectedDate;
         this.opened = 'from';
       }

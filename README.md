@@ -1,9 +1,7 @@
 Angular DateRange Picker
 ---
 
-This date range picker was heavily inspired by PayPal's datepicker as seen on website.
-
-Demo: http://ng-daterangepicker.jankuri.com
+This date range picker based on https://github.com/jkuri/ng-daterangepicker.
 
 ### Installation
 
@@ -34,14 +32,16 @@ export class AppModule { }
 ```ts
 // app.component.ts
 import { Component, OnInit } from '@angular/core';
-import { NgDateRangePickerOptions } from 'ng-daterangepicker';
+import { NgDateRangePickerOptions, NgDateRangePickerOutput } from '@kiwigrid/ng-daterangepicker';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  value: NgDateRangePickerOutput;
   options: NgDateRangePickerOptions;
+
 
   ngOnInit() {
     this.options = {
@@ -52,6 +52,10 @@ export class AppComponent {
 	  dateFormat: 'yMd',
 	  outputFormat: 'DD/MM/YYYY',
 	  startOfWeek: 1
+	};
+	this.value = {
+  		from: '',
+		to: ''
 	};
   }
 }
@@ -66,8 +70,8 @@ export class AppComponent {
 
 ```ts
 export interface NgDateRangePickerOptions {
-  theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
-    range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
+	theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
+	range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
     dayNames: string[];
     presetNames: string[];
     dateFormat: string;
@@ -79,7 +83,7 @@ export interface NgDateRangePickerOptions {
 ### Running the demo
 
 ```sh
-git clone https://github.com/jkuri/ng-daterangepicker.git --depth 1
+git clone https://github.com/kiwigrid/ng-daterangepicker.git --depth 1
 cd ng-daterangepicker
 npm start
 ```

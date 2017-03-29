@@ -6,10 +6,7 @@ import { NgDateRangePickerOptions, NgDateRangePickerOutput } from '../ng-dateran
   templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit  {
-  value: NgDateRangePickerOutput = {
-    from: '',
-    to: ''
-  };
+  value: NgDateRangePickerOutput;
   options: NgDateRangePickerOptions;
 
   ngOnInit() {
@@ -21,6 +18,10 @@ export class AppComponent implements OnInit  {
       dateFormat: 'yMd',
       outputFormat: 'DD/MM/YYYY',
       startOfWeek: 0
+    };
+    this.value = {
+      from: '',
+      to: ''
     };
   }
 }

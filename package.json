@@ -1,6 +1,6 @@
 {
-  "name": "ng-daterangepicker",
-  "version": "0.1.2",
+  "name": "@kiwigrid/ng-daterangepicker",
+  "version": "0.2.0",
   "description": "Angular PayPal Datepicker",
   "main": "bundles/ng-daterangepicker.umd.js",
   "module": "index.js",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jkuri/ng-daterangepicker.git"
+    "url": "git+https://github.com/kiwigrid/ng-daterangepicker.git"
   },
   "keywords": [
     "Angular",
@@ -37,12 +37,9 @@
     "daterange",
     "daterangepicker"
   ],
-  "author": "Jan Kuri <jkuri88@gmail.com>",
+  "author": "Norman Leyda <norman.leyda@kiwigrid.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jkuri/ng-daterangepicker/issues"
-  },
-  "homepage": "https://github.com/jkuri/ng-daterangepicker#readme",
+  "homepage": "https://github.com/kiwigrid/ng-daterangepicker#readme",
   "devDependencies": {
     "@angular/animations": "^4.0.0-rc.2",
     "@angular/common": "^4.0.0-rc.2",

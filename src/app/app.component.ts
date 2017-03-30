@@ -16,12 +16,11 @@ export class AppComponent implements OnInit  {
       dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
       dateFormat: 'yMd',
-      outputFormat: 'DD/MM/YYYY',
       startOfWeek: 0
     };
     this.value = {
-      from: '',
-      to: ''
+      from: 0,
+      to: 0
     };
   }
 }

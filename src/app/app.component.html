@@ -10,7 +10,7 @@
                 <button class="delete"></button>
               </div>
               <div class="message-body">
-                Value: {{ value.from }} - {{ value.to }}
+                Value: {{ value.from | date:'shortDate' }} - {{ value.to | date:'shortDate' }}
               </div>
             </article>
           </div>
@@ -37,7 +37,7 @@
         </div>
         <div class="column is-4 is-offset-4">
           <div class="is-fullwidth has-text-centered">
-            <ng-daterangepicker [(ngModel)]="value" [options]="options"></ng-daterangepicker>
+            <app-ng-daterangepicker [(ngModel)]="value" [options]="options"></app-ng-daterangepicker>
           </div>
         </div>
       </div>

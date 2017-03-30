@@ -53,8 +53,8 @@ export class AppComponent {
 	  startOfWeek: 1
 	};
 	this.value = {
-  		from: '',
-		to: ''
+  		from: 0,
+		to: 0
 	};
   }
 }

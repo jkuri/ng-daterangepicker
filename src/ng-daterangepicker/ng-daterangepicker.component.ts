@@ -148,8 +148,8 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     this.days = prevMonthDays.concat(days);
 
     this.value = {
-      from: +dateFns.format(this.dateFrom, 'x'),
-      to: +dateFns.format(this.dateTo, 'x')
+      from: +this.dateFrom,
+      to: +this.dateTo
     };
   }
 

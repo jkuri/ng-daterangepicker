@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule, ApplicationRef } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { AppComponent } from './app.component';
 import { NgDateRangePickerModule } from '../ng-daterangepicker';
@@ -35,7 +34,7 @@ export class AppModule {
   }
 
   hmrOnDestroy(store) {
-    let cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
+    const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
     store.disposeOldHosts = createNewHosts(cmpLocation);
     store.restoreInputValues  = createInputTransfer();
     removeNgStyles();

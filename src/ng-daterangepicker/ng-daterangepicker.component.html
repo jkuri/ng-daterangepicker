@@ -32,6 +32,16 @@
   </div>
 
   <div class="calendar" [ngClass]="{ 'is-opened': !!opened, 'is-to': opened === 'to' }">
+    <div class="side-container">
+      <div class="side-container-buttons">
+        <button type="button" class="side-button" (click)="selectRange('tm')" [class.is-active]="range === 'tm'">{{options.presetNames[0]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('lm')" [class.is-active]="range === 'lm'">{{options.presetNames[1]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('tw')" [class.is-active]="range === 'tw'">{{options.presetNames[2]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('lw')" [class.is-active]="range === 'lw'">{{options.presetNames[3]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('ty')" [class.is-active]="range === 'ty'">{{options.presetNames[4]}}</button>
+        <button type="button" class="side-button" (click)="selectRange('ly')" [class.is-active]="range === 'ly'">{{options.presetNames[5]}}</button>
+      </div>
+    </div>
     <div class="calendar-container">
       <div class="controls">
         <span class="control-icon" (click)="prevMonth()">
@@ -64,24 +74,6 @@
           <span *ngIf="d.visible" class="day-num" [class.is-active]="d.from || d.to">{{ d.day }}</span>
         </div>
       </div>
-    </div>
-    <div class="side-container">
-      <div class="side-container-buttons">
-        <button type="button" class="side-button" (click)="selectRange('tm')" [class.is-active]="range === 'tm'">{{options.presetNames[0]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('lm')" [class.is-active]="range === 'lm'">{{options.presetNames[1]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('tw')" [class.is-active]="range === 'tw'">{{options.presetNames[2]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('lw')" [class.is-active]="range === 'lw'">{{options.presetNames[3]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('ty')" [class.is-active]="range === 'ty'">{{options.presetNames[4]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('ly')" [class.is-active]="range === 'ly'">{{options.presetNames[5]}}</button>
-      </div>
-      <span class="close-icon" (click)="closeCalendar($event)">
-        <svg width="20px" height="20px" viewBox="47 44 20 20" version="1.1">
-          <g id="Group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(48.000000, 44.000000)">
-            <path d="M19.6876399,20 C19.6047542,19.999927 19.52529,19.9669423 19.4667175,19.9082976 L0.0839056416,0.525743396 C-0.0308734765,0.402566324 -0.0274867013,0.210616527 0.0915663128,0.0915650956 C0.210619327,-0.0274863359 0.402571676,-0.030873066 0.525750385,0.0839045261 L19.9085623,19.4664587 C19.9978567,19.5558631 20.0245499,19.6902301 19.9762091,19.8069762 C19.9278683,19.9237223 19.8139998,19.9998889 19.6876399,20 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
-            <path d="M0.312360116,20 C0.186000167,19.9998889 0.0721317315,19.9237223 0.0237909073,19.8069762 C-0.0245499168,19.6902301 0.0021432967,19.5558631 0.0914377445,19.4664587 L19.4742496,0.0839045261 C19.5974283,-0.030873066 19.7893807,-0.0274863359 19.9084337,0.0915650956 C20.0274867,0.210616527 20.0308735,0.402566324 19.9160944,0.525743396 L0.533282488,19.9082976 C0.474709982,19.9669423 0.395245751,19.999927 0.312360116,20 L0.312360116,20 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
-          </g>
-        </svg>
-      </span>
     </div>
   </div>
 </div>

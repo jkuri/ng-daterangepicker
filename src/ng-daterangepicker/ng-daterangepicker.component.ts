@@ -187,6 +187,14 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
       }
     }
 
+    if (dateFns.isEqual(this.dateFrom, this.dateTo)) {
+      this.dateTo = dateFns.addDays(this.dateFrom, 1);
+      this.opened = 'to';
+      console.log(this.dateFrom);
+      console.log(this.dateTo);
+    }
+
+    this.range = null;
     this.generateCalendar();
   }
 

@@ -50,7 +50,8 @@ export class AppComponent {
 	  dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
 	  presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
 	  dateFormat: 'yMd',
-	  startOfWeek: 1
+	  startOfWeek: 1,
+      position: 'right'
 	};
 	this.value = {
   		from: 0,
@@ -75,6 +76,7 @@ export interface NgDateRangePickerOptions {
     presetNames: string[];
     dateFormat: string;
     startOfWeek: number;
+  	position: string;
 }
 ```
 

@@ -8,7 +8,7 @@
                   'theme-gray': options.theme === 'gray' }">
 
   <div class="input-section" (click)="toggleCalendar($event, 'from')">
-    <span class="label-txt">{{options.presetNames[6]}}</span>
+    <span class="label-txt">{{options.presetNames[7]}}</span>
     <span class="value-txt">{{ dateFrom | date:options.dateFormat }}</span>
     <span class="cal-icon">
       <svg width="94px" height="94px" viewBox="3 3 94 94" version="1.1">
@@ -20,7 +20,7 @@
   </div>
 
   <div class="input-section" (click)="toggleCalendar($event, 'to')">
-    <span class="label-txt">{{options.presetNames[7]}}</span>
+    <span class="label-txt">{{options.presetNames[8]}}</span>
     <span class="value-txt">{{ dateTo | date:options.dateFormat }}</span>
     <span class="cal-icon">
       <svg width="94px" height="94px" viewBox="3 3 94 94" version="1.1">
@@ -31,16 +31,16 @@
     </span>
   </div>
 
-  <div class="calendar" [ngClass]="{ 'is-opened': !!opened, 'is-to': opened === 'to' }">
+  <div class="calendar" class="{{options.position}}" [ngClass]="{ 'is-opened': !!opened, 'is-to': opened === 'to' }">
     <div class="side-container">
       <div class="side-container-buttons">
-        <button type="button" class="side-button" (click)="selectRange('tm')" [class.is-active]="range === 'tm'">{{options.presetNames[0]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('lm')" [class.is-active]="range === 'lm'">{{options.presetNames[1]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('tw')" [class.is-active]="range === 'tw'">{{options.presetNames[2]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('lw')" [class.is-active]="range === 'lw'">{{options.presetNames[3]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('ty')" [class.is-active]="range === 'ty'">{{options.presetNames[4]}}</button>
-        <button type="button" class="side-button" (click)="selectRange('ly')" [class.is-active]="range === 'ly'">{{options.presetNames[5]}}</button>
+        <button *ngFor="let rangeVal of availableRanges;let i = index" type="button" class="action-button" (click)="selectRange(rangeVal)" [class.is-active]="range === rangeVal">{{options.presetNames[i]}}</button>
       </div>
+    </div>
+    <div class="select-container">
+      <select [class.is-active]="range">
+        <option *ngFor="let rangeVal of availableRanges;let i = index" (click)="selectRange(rangeVal)" [selected]="setSelected(rangeVal)">{{options.presetNames[i]}}</option>
+      </select>
     </div>
     <div class="calendar-container">
       <div class="controls">
@@ -73,6 +73,14 @@
              (click)="selectDate($event, i)">
           <span *ngIf="d.visible" class="day-num" [class.is-active]="d.from || d.to">{{ d.day }}</span>
         </div>
+      </div>
+      <div>
+        <button type="button" class="action-button" (click)="closeCalendar()">
+          {{options.presetNames[10]}}
+        </button>
+        <button type="button" class="action-button is-active" (click)="updateValue()">
+          {{options.presetNames[9]}}
+        </button>
       </div>
     </div>
   </div>

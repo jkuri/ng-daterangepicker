@@ -1,7 +1,7 @@
 {
-  "name": "@kiwigrid/ng-daterangepicker",
+  "name": "@kiwigrid/ngx-daterangepicker",
   "version": "0.2.1",
-  "description": "Angular PayPal Datepicker",
+  "description": "Angular Datepicker",
   "main": "bundles/ng-daterangepicker.umd.js",
   "module": "index.js",
   "typings": "index.d.ts",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kiwigrid/ng-daterangepicker.git"
+    "url": "git+https://github.com/kiwigrid/ngx-daterangepicker.git"
   },
   "keywords": [
     "Angular",
@@ -39,7 +39,7 @@
   ],
   "author": "Norman Leyda <norman.leyda@kiwigrid.com>",
   "license": "MIT",
-  "homepage": "https://github.com/kiwigrid/ng-daterangepicker#readme",
+  "homepage": "https://github.com/kiwigrid/ngx-daterangepicker#readme",
   "devDependencies": {
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",

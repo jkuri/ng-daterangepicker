@@ -1,6 +1,6 @@
 {
   "name": "@kiwigrid/ngx-daterangepicker",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Angular Datepicker",
   "main": "bundles/ng-daterangepicker.umd.js",
   "module": "index.js",

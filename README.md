@@ -6,19 +6,19 @@ This date range picker based on https://github.com/jkuri/ng-daterangepicker.
 ### Installation
 
 ```sh
-npm install ng-daterangepicker --save
+npm install @kiwigrid/ngx-daterangepicker --save
 ```
 
 or
 
 ```sh
-yarn add ng-daterangepicker --save
+yarn add @kiwigrid/ngx-daterangepicker --save
 ```
 
 ### Example
 
 ```ts
-import { NgDateRangePickerModule } from 'ng-daterangepicker';
+import { NgDateRangePickerModule } from '@kiwigrid/ngx-daterangepicker';
 
 // app.module.ts
 @NgModule({
@@ -32,7 +32,7 @@ export class AppModule { }
 ```ts
 // app.component.ts
 import { Component, OnInit } from '@angular/core';
-import { NgDateRangePickerOptions, NgDateRangePickerOutput } from '@kiwigrid/ng-daterangepicker';
+import { NgDateRangePickerOptions, NgDateRangePickerOutput } from '@kiwigrid/ngx-daterangepicker';
 
 @Component({
   selector: 'app-root',
@@ -48,7 +48,19 @@ export class AppComponent {
 	  theme: 'default',
 	  range: 'tm',
 	  dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-	  presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
+	  presetNames: [
+	   'This Month',
+	   'Last Month',
+	   'This Week',
+	   'Last Week',
+	   'This Year',
+	   'Last Year',
+	   'Last 7 Days',
+	   'Start',
+	   'End',
+	   'Apply',
+	   'Cancel'
+	  ],
 	  dateFormat: 'yMd',
 	  startOfWeek: 1,
 	  position: 'right'
@@ -83,8 +95,8 @@ export interface NgDateRangePickerOptions {
 ### Running the demo
 
 ```sh
-git clone https://github.com/kiwigrid/ng-daterangepicker.git --depth 1
-cd ng-daterangepicker
+git clone https://github.com/kiwigrid/ngx-daterangepicker.git --depth 1
+cd ngx-daterangepicker
 npm start
 ```
 

@@ -9,6 +9,7 @@ export interface NgDateRangePickerOptions {
   presetNames: string[];
   dateFormat: string;
   startOfWeek: number;
+  position: string;
 }
 
 export interface IDay {
@@ -38,7 +39,7 @@ export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'app-ng-daterangepicker',
   templateUrl: 'ng-daterangepicker.component.html',
-  styleUrls: ['ng-daterangepicker.sass'],
+  styleUrls: ['ng-daterangepicker.scss'],
   providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
 })
 export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
@@ -56,10 +57,26 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     theme: 'default',
     range: 'tm',
     dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
+    presetNames: [
+      'This Month',
+      'Last Month',
+      'This Week',
+      'Last Week',
+      'This Year',
+      'Last Year',
+      'Last 7 Days',
+      'Start',
+      'End',
+      'Apply',
+      'Cancel'
+    ],
     dateFormat: 'yMd',
-    startOfWeek: 0
+    startOfWeek: 0,
+    position: 'left'
   };
+  availableRanges: string[] = ['tm', 'lm', 'tw', 'lw', 'ty', 'ly', 'l7d'];
+  openerDates: Date[];
+  openerRange: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'l7d';
 
   private onTouchedCallback: () => void = () => { };
   private onChangeCallback: (_: any) => void = () => { };
@@ -146,11 +163,6 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     }
 
     this.days = prevMonthDays.concat(days);
-
-    this.value = {
-      from: +this.dateFrom,
-      to: +this.dateTo
-    };
   }
 
   toggleCalendar(e: MouseEvent, selection: 'from' | 'to'): void {
@@ -159,9 +171,12 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     } else {
       this.opened = this.opened ? false : selection;
     }
+
+    this.generateCalendar();
   }
 
   closeCalendar(e: MouseEvent): void {
+    this.resetValues();
     this.opened = false;
   }
 
@@ -171,22 +186,30 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
 
     if (this.opened === 'from') {
       if (dateFns.isAfter(selectedDate, this.dateTo)) {
-        this.dateTo = selectedDate;
-        this.opened = 'from';
+        this.dateFrom = selectedDate;
+        this.dateTo = dateFns.addDays(this.dateFrom, 1);
+        this.opened = 'to';
       } else {
         this.dateFrom = selectedDate;
         this.opened = 'to';
       }
     } else if (this.opened === 'to') {
       if (dateFns.isBefore(selectedDate, this.dateFrom)) {
-        this.dateFrom = selectedDate;
-        this.opened = 'to';
-      } else if (this.opened === 'to') {
+        this.dateTo = selectedDate;
+        this.dateFrom = dateFns.subDays(this.dateTo, 1);
+        this.opened = 'from';
+      } else {
         this.dateTo = selectedDate;
         this.opened = 'from';
       }
     }
 
+    if (dateFns.isEqual(this.dateFrom, this.dateTo)) {
+      this.dateTo = dateFns.addDays(this.dateFrom, 1);
+      this.opened = 'to';
+    }
+
+    this.range = null;
     this.generateCalendar();
   }
 
@@ -203,7 +226,9 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   selectRange(range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'l7d'): void {
     let today = dateFns.startOfDay(new Date());
 
-    switch (range) {
+    this.range = range;
+
+    switch (this.range) {
       case 'tm':
         this.dateFrom = dateFns.startOfMonth(today);
         this.dateTo = dateFns.endOfMonth(today);
@@ -237,14 +262,42 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
         break;
     }
 
-    this.range = range;
+    if (!this.opened) {
+      this.setOpenerValues();
+    }
+
     this.generateCalendar();
+  }
+
+  updateValue(e: MouseEvent): void {
+    this.value = {
+      from: +this.dateFrom,
+      to: +this.dateTo
+    };
+    this.opened = false;
+    this.setOpenerValues();
+  }
+
+  setOpenerValues(): void {
+    this.openerDates = [this.dateFrom, this.dateTo];
+    this.openerRange = this.range;
+  }
+
+  setSelected(range: string): boolean {
+    return range === this.range;
+  }
+
+  resetValues(): void {
+    this.dateFrom = this.openerDates[0];
+    this.dateTo = this.openerDates[1];
+    this.range = this.openerRange;
   }
 
   @HostListener('document:click', ['$event'])
   handleBlurClick(e: MouseEvent) {
     const target = e.srcElement || e.target;
     if (!this.elementRef.nativeElement.contains(e.target) && !(<Element>target).classList.contains('day-num')) {
+      this.resetValues();
       this.opened = false;
     }
   }

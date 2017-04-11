@@ -11,7 +11,7 @@ module.exports = function (config) {
       { pattern: './config/spec-bundle.js', watched: false },
       { pattern: './src/assets/**/*', watched: false, included: false, served: true, nocache: false },
       { pattern: './public/**/*', watched: false, included: false, served: true, nocache: false },
-      './src/styles/app.sass'
+      './src/styles/app.scss'
     ],
     proxies: {
       '/images/': '/base/public/images/',
@@ -26,7 +26,7 @@ module.exports = function (config) {
       require('karma-spec-reporter'),
       require('karma-coverage-istanbul-reporter')
     ],
-    preprocessors: { './config/spec-bundle.js': ['webpack'], './src/styles/app.sass': ['sass'] },
+    preprocessors: { './config/spec-bundle.js': ['webpack'], './src/styles/app.scss': ['scss'] },
     webpack: testWebpackConfig,
     coverageReporter: {
       type: 'in-memory'

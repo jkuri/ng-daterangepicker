@@ -14,12 +14,12 @@ function formattedSASSMessage(error, file) {
 }
 
 function createSASSPreprocessor(args, config = {}, logger, helper) {
-  const log = logger.create('preprocessor.sass');
+  const log = logger.create('preprocessor.scss');
 
   const options = helper.merge({
     sourceMap: false,
     transformPath(filepath) {
-      return filepath.replace(/\.sass$/, '.css');
+      return filepath.replace(/\.scss$/, '.css');
     },
   }, args.options || {}, config.options || {});
 
@@ -57,5 +57,5 @@ function createSASSPreprocessor(args, config = {}, logger, helper) {
 createSASSPreprocessor.$inject = ['args', 'config.sassPreprocessor', 'logger', 'helper'];
 
 module.exports = {
-  'preprocessor:sass': ['factory', createSASSPreprocessor]
+  'preprocessor:scss': ['factory', createSASSPreprocessor]
 };

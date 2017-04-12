@@ -2,7 +2,7 @@
   "name": "@kiwigrid/ngx-daterangepicker",
   "version": "0.2.4",
   "description": "Angular Datepicker",
-  "main": "bundles/ng-daterangepicker.umd.js",
+  "main": "bundles/ngx-daterangepicker.umd.js",
   "module": "index.js",
   "typings": "index.d.ts",
   "scripts": {
@@ -11,7 +11,7 @@
     "build:prod": "npm run clean && webpack --config config/webpack.config.prod.js --progress --bail",
     "build:dist": "ngc -p tsconfig.dist.json && webpack --config config/webpack.config.dist.js --progress --bail",
     "start": "npm run serve",
-    "clean": "rimraf dist/ src/ngfactory lib bundles index.d.ts index.js index.metadata.json ng-daterangepicker.d.ts ng-daterangepicker.metadata.json ng-daterangepicker.js src/**/*.metadata.json src/**/*.d.ts src/**/*.js aot",
+    "clean": "rimraf dist/ src/ngfactory lib bundles index.d.ts index.js index.metadata.json ngx-daterangepicker.d.ts ngx-daterangepicker.metadata.json ngx-daterangepicker.js src/**/*.metadata.json src/**/*.d.ts src/**/*.js aot",
     "test": "karma start config/karma.conf.js",
     "e2e:live": "npm run e2e -- --elementExplorer",
     "e2e": "npm run protractor ./config/protractor.conf.js",

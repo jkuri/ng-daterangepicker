@@ -1,7 +1,7 @@
 Angular DateRange Picker
 ---
 
-This date range picker based on https://github.com/jkuri/ng-daterangepicker.
+This date range picker based on https://github.com/jkuri/ngx-daterangepicker.
 
 ### Installation
 
@@ -18,12 +18,12 @@ yarn add @kiwigrid/ngx-daterangepicker --save
 ### Example
 
 ```ts
-import { NgDateRangePickerModule } from '@kiwigrid/ngx-daterangepicker';
+import { NgxDateRangePickerModule } from '@kiwigrid/ngx-daterangepicker';
 
 // app.module.ts
 @NgModule({
   ...
-  imports: [ ..., NgDateRangePickerModule, ... ],
+  imports: [ ..., NgxDateRangePickerModule, ... ],
   ...
 })
 export class AppModule { }
@@ -32,15 +32,15 @@ export class AppModule { }
 ```ts
 // app.component.ts
 import { Component, OnInit } from '@angular/core';
-import { NgDateRangePickerOptions, NgDateRangePickerOutput } from '@kiwigrid/ngx-daterangepicker';
+import { NgxDateRangePickerOptions, NgxDateRangePickerOutput } from '@kiwigrid/ngx-daterangepicker';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  value: NgDateRangePickerOutput;
-  options: NgDateRangePickerOptions;
+  value: NgxDateRangePickerOutput;
+  options: NgxDateRangePickerOptions;
 
 
   ngOnInit() {
@@ -75,13 +75,13 @@ export class AppComponent {
 
 ```html
 <!-- app.component.html -->
-<ng-daterangepicker [(ngModel)]="value" [options]="options"></ng-daterangepicker>
+<ngx-daterangepicker [(ngModel)]="value" [options]="options"></ngx-daterangepicker>
 ```
 
 ### Configuration
 
 ```ts
-export interface NgDateRangePickerOptions {
+export interface NgxDateRangePickerOptions {
 	theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
 	range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
     dayNames: string[];

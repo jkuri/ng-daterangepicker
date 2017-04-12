@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NgDateRangePickerOptions, NgDateRangePickerOutput } from '../ng-daterangepicker';
+import { NgxDateRangePickerOptions, NgxDateRangePickerOutput } from '../ngx-daterangepicker';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit  {
-  value: NgDateRangePickerOutput;
-  options: NgDateRangePickerOptions;
+  value: NgxDateRangePickerOutput;
+  options: NgxDateRangePickerOptions;
 
   ngOnInit() {
     this.options = {

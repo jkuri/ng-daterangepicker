@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChang
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as dateFns from 'date-fns';
 
-export interface NgDateRangePickerOptions {
+export interface NgxDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'l7d';
   dayNames: string[];
@@ -25,27 +25,27 @@ export interface IDay {
   isWithinRange: boolean;
 }
 
-export interface NgDateRangePickerOutput {
+export interface NgxDateRangePickerOutput {
   from: number;
   to: number;
 }
 
 export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => NgDateRangePickerComponent),
+  useExisting: forwardRef(() => NgxDateRangePickerComponent),
   multi: true
 };
 
 @Component({
-  selector: 'app-ng-daterangepicker',
-  templateUrl: 'ng-daterangepicker.component.html',
-  styleUrls: ['ng-daterangepicker.scss'],
+  selector: 'ngx-daterangepicker',
+  templateUrl: 'ngx-daterangepicker.component.html',
+  styleUrls: ['ngx-daterangepicker.scss'],
   providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
 })
-export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
-  @Input() options: NgDateRangePickerOptions;
+export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
+  @Input() options: NgxDateRangePickerOptions;
 
-  modelValue: NgDateRangePickerOutput;
+  modelValue: NgxDateRangePickerOutput;
   opened: false | 'from' | 'to';
   date: Date;
   dateFrom: Date;
@@ -53,7 +53,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   dayNames: string[];
   days: IDay[];
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'l7d';
-  defaultOptions: NgDateRangePickerOptions = {
+  defaultOptions: NgxDateRangePickerOptions = {
     theme: 'default',
     range: 'tm',
     dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -83,17 +83,17 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
 
   constructor(private elementRef: ElementRef) { }
 
-  get value(): NgDateRangePickerOutput {
+  get value(): NgxDateRangePickerOutput {
     return this.modelValue;
   }
 
-  set value(value: NgDateRangePickerOutput) {
+  set value(value: NgxDateRangePickerOutput) {
     if (!value) { return; }
     this.modelValue = value;
     this.onChangeCallback(value);
   }
 
-  writeValue(value: NgDateRangePickerOutput) {
+  writeValue(value: NgxDateRangePickerOutput) {
     if (!value) { return; }
     this.modelValue = value;
   }

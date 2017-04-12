@@ -34,7 +34,7 @@
   <div class="calendar" class="{{options.position}}" [ngClass]="{ 'is-opened': !!opened, 'is-to': opened === 'to' }">
     <div class="side-container">
       <div class="side-container-buttons">
-        <button *ngFor="let rangeVal of availableRanges;let i = index" type="button" class="action-button" (click)="selectRange(rangeVal)" [class.is-active]="range === rangeVal">{{options.presetNames[i]}}</button>
+        <button *ngFor="let rangeVal of availableRanges;let i = index" type="button" id="{{rangeVal}}" class="action-button" (click)="selectRange(rangeVal)" [class.is-active]="range === rangeVal">{{options.presetNames[i]}}</button>
       </div>
     </div>
     <div class="select-container">
@@ -75,10 +75,10 @@
         </div>
       </div>
       <div>
-        <button type="button" class="action-button" (click)="closeCalendar()">
+        <button id="apply" type="button" class="action-button" (click)="closeCalendar()">
           {{options.presetNames[10]}}
         </button>
-        <button type="button" class="action-button is-active" (click)="updateValue()">
+        <button id="cancel" type="button" class="action-button is-active" (click)="updateValue()">
           {{options.presetNames[9]}}
         </button>
       </div>

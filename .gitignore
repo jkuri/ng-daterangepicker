@@ -1,3 +1,4 @@
+.idea
 node_modules/
 dist/
 .DS_Store
@@ -9,6 +10,7 @@ bundles/
 **/*.js
 **/*.d.ts
 **/*.metadata.json
+yarn-error.log
 
 !config/**/*.js
 !config/**/*.json

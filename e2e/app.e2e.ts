@@ -8,7 +8,7 @@ describe('App', () => {
 
   it('should have a title', () => {
     let subject = browser.getTitle();
-    let result  = 'Angular PayPal DatePicker';
-    expect(subject).toEqual(result);
+    let result  = 'Angular DateRangePicker';
+    expect<any>(subject).toEqual(result);
   });
 });

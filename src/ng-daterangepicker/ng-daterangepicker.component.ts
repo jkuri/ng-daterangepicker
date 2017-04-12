@@ -75,7 +75,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     position: 'left'
   };
   availableRanges: string[] = ['tm', 'lm', 'tw', 'lw', 'ty', 'ly', 'l7d'];
-  openerDates: Date[];
+  openerDates: Date[] = [null, null];
   openerRange: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'l7d';
 
   private onTouchedCallback: () => void = () => { };

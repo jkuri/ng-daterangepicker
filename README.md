@@ -20,12 +20,12 @@ yarn add ng-daterangepicker --save
 ### Example
 
 ```ts
-import { NgDateRangePickerModule } from 'ng-daterangepicker';
+import { NgxDateRangePickerModule } from 'ng-daterangepicker';
 
 // app.module.ts
 @NgModule({
   ...
-  imports: [ ..., NgDateRangePickerModule, ... ],
+  imports: [ ..., NgxDateRangePickerModule, ... ],
   ...
 })
 export class AppModule { }
@@ -34,14 +34,14 @@ export class AppModule { }
 ```ts
 // app.component.ts
 import { Component, OnInit } from '@angular/core';
-import { NgDateRangePickerOptions } from 'ng-daterangepicker';
+import { NgxDateRangePickerOptions } from 'ng-daterangepicker';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  options: NgDateRangePickerOptions;
+  options: NgxDateRangePickerOptions;
 
   ngOnInit() {
     this.options = {
@@ -65,7 +65,7 @@ export class AppComponent {
 ### Configuration
 
 ```ts
-export interface NgDateRangePickerOptions {
+export interface NgxDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
   dayNames: string[];

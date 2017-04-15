@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgxDateRangePickerComponent } from './ng-daterangepicker.component';
+import { NgDateRangePickerComponent } from './ng-daterangepicker.component';
 
 @NgModule({
-  declarations: [ NgxDateRangePickerComponent ],
+  declarations: [ NgDateRangePickerComponent ],
   imports: [ CommonModule, FormsModule ],
-  exports: [ NgxDateRangePickerComponent, CommonModule, FormsModule ]
+  exports: [ NgDateRangePickerComponent, CommonModule, FormsModule ]
 })
-export class NgxDateRangePickerModule { }
+export class NgDateRangePickerModule { }

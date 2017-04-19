@@ -5,3 +5,6 @@ src/ngfactory
 lib/
 coverage/
 aot/
+.idea
+e2e
+yarn-error.log

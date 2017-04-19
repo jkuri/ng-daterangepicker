@@ -109,13 +109,13 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
   ngOnInit() {
     this.opened = false;
     this.date = dateFns.startOfDay(new Date());
-    this.options = this.options || this.defaultOptions;
+    this.options = Object.assign({}, this.defaultOptions, this.options);
     this.initNames();
     this.selectRange(this.options.range);
   }
 
   ngOnChanges(changes: {[propName: string]: SimpleChange}) {
-    this.options = this.options || this.defaultOptions;
+    this.options = Object.assign({}, this.defaultOptions, this.options);
   }
 
   initNames(): void {
@@ -175,7 +175,7 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
     this.generateCalendar();
   }
 
-  closeCalendar(e: MouseEvent): void {
+  closeCalendar(): void {
     this.resetValues();
     this.opened = false;
   }
@@ -269,7 +269,7 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
     this.generateCalendar();
   }
 
-  updateValue(e: MouseEvent): void {
+  updateValue(): void {
     this.value = {
       from: +this.dateFrom,
       to: +this.dateTo

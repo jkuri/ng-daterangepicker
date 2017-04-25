@@ -18,7 +18,7 @@
     ]
   },
   "include": [
-    "src/ng-daterangepicker/**/*.ts"
+    "src/ngx-daterangepicker/**/*.ts"
   ],
   "exclude": [
     "node_modules",
@@ -28,7 +28,7 @@
   ],
   "files": [
     "index.ts",
-    "ng-daterangepicker.ts"
+    "ngx-daterangepicker.ts"
   ],
   "angularCompilerOptions": {
     "genDir": "aot",

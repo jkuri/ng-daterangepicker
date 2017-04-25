@@ -1,8 +1,8 @@
 {
-  "name": "ng-daterangepicker",
+  "name": "ngx-daterangepicker",
   "version": "0.2.0",
   "description": "Angular PayPal Datepicker",
-  "main": "bundles/ng-daterangepicker.umd.js",
+  "main": "bundles/ngx-daterangepicker.umd.js",
   "module": "index.js",
   "typings": "index.d.ts",
   "scripts": {
@@ -11,7 +11,7 @@
     "build:prod": "npm run clean && webpack --config config/webpack.config.prod.js --progress --bail",
     "build:dist": "ngc -p tsconfig.dist.json && webpack --config config/webpack.config.dist.js --progress --bail",
     "start": "npm run serve",
-    "clean": "rimraf dist/ src/ngfactory lib bundles index.d.ts index.js index.metadata.json ng-daterangepicker.d.ts ng-daterangepicker.metadata.json ng-daterangepicker.js src/**/*.metadata.json src/**/*.d.ts src/**/*.js aot",
+    "clean": "rimraf dist/ src/ngfactory lib bundles index.d.ts index.js index.metadata.json ngx-daterangepicker.d.ts ngx-daterangepicker.metadata.json ngx-daterangepicker.js src/**/*.metadata.json src/**/*.d.ts src/**/*.js aot",
     "test": "karma start config/karma.conf.js",
     "e2e:live": "npm run e2e -- --elementExplorer",
     "e2e": "npm run protractor ./config/protractor.conf.js",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jkuri/ng-daterangepicker.git"
+    "url": "git+https://github.com/jkuri/ngx-daterangepicker.git"
   },
   "keywords": [
     "Angular",
@@ -37,12 +37,12 @@
     "daterange",
     "daterangepicker"
   ],
-  "author": "Jan Kuri <jkuri88@gmail.com>",
+  "author": "Rubén Cid <rubencidlara@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jkuri/ng-daterangepicker/issues"
+    "url": "https://github.com/GNURub/ngx-daterangepicker/issues"
   },
-  "homepage": "https://github.com/jkuri/ng-daterangepicker#readme",
+  "homepage": "https://github.com/GNURub/ngx-daterangepicker#readme",
   "devDependencies": {
     "@angular/animations": "^4.0.0-rc.2",
     "@angular/common": "^4.0.0-rc.2",

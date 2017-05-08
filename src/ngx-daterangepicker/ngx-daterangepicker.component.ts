@@ -187,7 +187,7 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
     if (this.opened === 'from') {
       if (dateFns.isAfter(selectedDate, this.dateTo)) {
         this.dateFrom = selectedDate;
-        this.dateTo = dateFns.addDays(this.dateFrom, 1);
+        this.dateTo = dateFns.endOfDay(selectedDate);
         this.opened = 'to';
       } else {
         this.dateFrom = selectedDate;
@@ -195,11 +195,11 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
       }
     } else if (this.opened === 'to') {
       if (dateFns.isBefore(selectedDate, this.dateFrom)) {
-        this.dateTo = selectedDate;
-        this.dateFrom = dateFns.subDays(this.dateTo, 1);
+        this.dateTo = dateFns.endOfDay(selectedDate);
+        this.dateFrom = dateFns.startOfDay(selectedDate);
         this.opened = 'from';
       } else {
-        this.dateTo = selectedDate;
+        this.dateTo = dateFns.endOfDay(selectedDate);
         this.opened = 'from';
       }
     }
@@ -257,8 +257,8 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
         this.dateTo = dateFns.endOfYear(today);
         break;
       case 'l7d':
-        this.dateFrom = dateFns.subDays(today, 7);
-        this.dateTo = today;
+        this.dateFrom = dateFns.subDays(today, 6);
+        this.dateTo = dateFns.endOfDay(today);
         break;
     }
 

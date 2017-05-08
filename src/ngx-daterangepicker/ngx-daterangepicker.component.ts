@@ -199,7 +199,7 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
         this.dateFrom = dateFns.subDays(this.dateTo, 1);
         this.opened = 'from';
       } else {
-        this.dateTo = selectedDate;
+        this.dateTo = dateFns.endOfDay(selectedDate);
         this.opened = 'from';
       }
     }

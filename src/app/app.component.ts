@@ -28,7 +28,7 @@ export class AppComponent implements OnInit  {
         'Cancel'
       ],
       dateFormat: 'yMd',
-      startOfWeek: 0,
+      startOfWeek: 1,
       position: 'left'
     };
     this.value = {

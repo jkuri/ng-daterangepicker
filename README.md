@@ -1,7 +1,7 @@
 Angular DateRange Picker
 ---
 
-This date range picker based on https://github.com/jkuri/ngx-daterangepicker.
+This date range picker based on https://github.com/jkuri/ng-daterangepicker.
 
 ### Installation
 

@@ -3,24 +3,24 @@ Angular DateRange Picker
 
 This date range picker was heavily inspired by PayPal's datepicker as seen on website.
 
-Demo: http://ng-daterangepicker.jankuri.com
+Demo: https://gnurub.github.io/ngx-daterangepicker/
 
 ### Installation
 
 ```sh
-npm install ng-daterangepicker --save
+npm install ngx-daterangepicker --save
 ```
 
 or
 
 ```sh
-yarn add ng-daterangepicker --save
+yarn add ngx-daterangepicker --save
 ```
 
 ### Example
 
 ```ts
-import { NgDateRangePickerModule } from 'ng-daterangepicker';
+import { NgDateRangePickerModule } from 'ngx-daterangepicker';
 
 // app.module.ts
 @NgModule({
@@ -34,7 +34,7 @@ export class AppModule { }
 ```ts
 // app.component.ts
 import { Component, OnInit } from '@angular/core';
-import { NgDateRangePickerOptions } from 'ng-daterangepicker';
+import { NgDateRangePickerOptions } from 'ngx-daterangepicker';
 
 @Component({
   selector: 'app-root',
@@ -59,7 +59,7 @@ export class AppComponent {
 
 ```html
 <!-- app.component.html -->
-<ng-daterangepicker [(ngModel)]="value" [options]="options"></ng-daterangepicker>
+<ngx-daterangepicker [(ngModel)]="value" [options]="options"></ngx-daterangepicker>
 ```
 
 ### Configuration
@@ -79,8 +79,8 @@ export interface NgDateRangePickerOptions {
 ### Running the demo
 
 ```sh
-git clone https://github.com/jkuri/ng-daterangepicker.git --depth 1
-cd ng-daterangepicker
+git clone https://github.com/jkuri/ngx-daterangepicker.git --depth 1
+cd ngx-daterangepicker
 npm start
 ```
 

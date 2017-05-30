@@ -7,7 +7,6 @@ export interface NgDateRangePickerOptions {
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
   dayNames: string[];
   presetNames: string[];
-  dateFormat: string;
   outputFormat: string;
   startOfWeek: number;
 }
@@ -53,7 +52,6 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     range: 'tm',
     dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
-    dateFormat: 'yMd',
     outputFormat: 'DD/MM/YYYY',
     startOfWeek: 0
   }
@@ -143,7 +141,11 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     }
 
     this.days = prevMonthDays.concat(days);
-    this.value = `${dateFns.format(this.dateFrom, this.options.outputFormat)}-${dateFns.format(this.dateTo, this.options.outputFormat)}`;
+    this.value = `${this.formatDate(this.dateFrom)}-${this.formatDate(this.dateTo)}`;
+  }
+
+  formatDate(value: Date) {
+    return dateFns.format(value, this.options.outputFormat);
   }
 
   toggleCalendar(e: MouseEvent, selection: 'from' | 'to'): void {

@@ -22,7 +22,7 @@
                 <label class="label">Theme</label>
               </div>
               <span class="select">
-                <select [(ngModel)]="options.theme">
+                <select (change)="this.options.theme = $event.target.value">
                   <option>default</option>
                   <option>green</option>
                   <option>teal</option>

@@ -90,7 +90,9 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit 
   ngOnInit() {
     this.opened = false;
     this.date = dateFns.startOfDay(new Date());
-    this.options = _.extend(this.options || {}, this.defaultOptions);
+    _.assignInWith(this.options || {}, this.defaultOptions, (objValue, srcValue) => {
+      return _.isUndefined(objValue) ? srcValue : objValue;
+    });
     this.initNames();
     this.selectRange(this.options.range);
   }

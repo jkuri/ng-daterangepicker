@@ -1,15 +1,16 @@
 import { Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChanges, SimpleChange } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as dateFns from 'date-fns';
+import * as _ from 'lodash';
 
 export interface NgDateRangePickerOptions {
-  theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
-  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
-  dayNames: string[];
-  presetNames: string[];
-  dateFormat: string;
-  outputFormat: string;
-  startOfWeek: number;
+  theme?: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
+  range?: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
+  dayNames?: string[];
+  presetNames?: string[];
+  dateFormat?: string;
+  outputFormat?: string;
+  startOfWeek?: number;
 }
 
 export interface IDay {
@@ -37,7 +38,7 @@ export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   styleUrls: ['ng-daterangepicker.sass'],
   providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
 })
-export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit {
   @Input() options: NgDateRangePickerOptions;
 
   modelValue: string;
@@ -56,7 +57,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     dateFormat: 'yMd',
     outputFormat: 'DD/MM/YYYY',
     startOfWeek: 0
-  }
+  };
 
   private onTouchedCallback: () => void = () => { };
   private onChangeCallback: (_: any) => void = () => { };
@@ -89,13 +90,9 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   ngOnInit() {
     this.opened = false;
     this.date = dateFns.startOfDay(new Date());
-    this.options = this.options || this.defaultOptions;
+    this.options = _.extend(this.options || {}, this.defaultOptions);
     this.initNames();
     this.selectRange(this.options.range);
-  }
-
-  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
-    this.options = this.options || this.defaultOptions;
   }
 
   initNames(): void {

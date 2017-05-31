@@ -66,13 +66,13 @@ export class AppComponent {
 
 ```ts
 export interface NgDateRangePickerOptions {
-  theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
-  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
-  dayNames: string[];
-  presetNames: string[];
-  dateFormat: string;
-  outputFormat: string;
-  startOfWeek: number;
+  theme?: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
+  range?: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
+  dayNames?: string[];
+  presetNames?: string[];
+  dateFormat?: string;
+  outputFormat?: string;
+  startOfWeek?: number;
 }
 ```
 

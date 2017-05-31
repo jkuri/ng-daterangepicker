@@ -186,7 +186,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   }
 
   formatTimeForTitle(hours: number, minutes: number, seconds: number): string {
-    let f = (v) => {
+    let f = (v: number): string | number => {
       return v < 10 ? '0' + v : v;
     };
     return `${f(hours)}:${f(minutes)}${this.showSeconds() ? ':' + f(seconds) : ''}`;

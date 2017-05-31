@@ -51,7 +51,9 @@ export class AppComponent {
 	  presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
 	  dateFormat: 'yMd',
 	  outputFormat: 'DD/MM/YYYY',
-	  startOfWeek: 1
+	  startOfWeek: 1,
+    showTime: true,
+    timeFormat: 'HH:mm:ss'
 	};
   }
 }

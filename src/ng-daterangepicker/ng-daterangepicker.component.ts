@@ -1,3 +1,4 @@
+import { ViewChild } from '@angular/core';
 import { Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChanges, SimpleChange } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as dateFns from 'date-fns';
@@ -10,6 +11,8 @@ export interface NgDateRangePickerOptions {
   dateFormat: string;
   outputFormat: string;
   startOfWeek: number;
+  showTime?: boolean;
+  timeFormat?: string;
 }
 
 export interface IDay {
@@ -42,6 +45,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
 
   modelValue: string;
   opened: false | 'from' | 'to';
+  timerOpened: boolean;
   date: Date;
   dateFrom: Date;
   dateTo: Date;
@@ -55,8 +59,16 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
     dateFormat: 'yMd',
     outputFormat: 'DD/MM/YYYY',
-    startOfWeek: 0
-  }
+    startOfWeek: 0,
+    showTime: false,
+    timeFormat: 'HH:mm:ss'
+  };
+  @ViewChild('hours')
+  private hoursEl: ElementRef;
+  @ViewChild('minutes')
+  private minutesEl: ElementRef;
+  @ViewChild('seconds')
+  private secondsEl: ElementRef;
 
   private onTouchedCallback: () => void = () => { };
   private onChangeCallback: (_: any) => void = () => { };
@@ -146,6 +158,14 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     this.value = `${dateFns.format(this.dateFrom, this.options.outputFormat)}-${dateFns.format(this.dateTo, this.options.outputFormat)}`;
   }
 
+  formatDate(value: Date) {
+    return dateFns.format(value, this.options.outputFormat);
+  }
+
+  formatTime(value: Date) {
+    return dateFns.format(value, this.options.timeFormat);
+  }
+
   toggleCalendar(e: MouseEvent, selection: 'from' | 'to'): void {
     if (this.opened && this.opened !== selection) {
       this.opened = selection;
@@ -154,22 +174,62 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     }
   }
 
+  toggleTimer(): void {
+    this.timerOpened = !this.timerOpened;
+  }
+
   closeCalendar(e: MouseEvent): void {
     this.opened = false;
+  }
+
+  getTimeUnitValue(unitFormat: 'H' | 'm' | 's'): string {
+      return dateFns.format(this.opened === 'from' ? this.dateFrom :  this.dateTo, unitFormat);
+  }
+
+  formatTimeForTitle(hours: number, minutes: number, seconds: number): string {
+    let f = (v) => {
+      return v < 10 ? '0' + v : v;
+    };
+    return `${f(hours)}:${f(minutes)}${this.showSeconds() ? ':' + f(seconds) : ''}`;
+  }
+
+  onTimeChange(): void {
+      if (this.opened === 'from') {
+        this.setTime(this.dateFrom);
+      } else {
+        this.setTime(this.dateTo);
+      }
+  }
+
+  setTime(dateObj: Date): void {
+    dateObj.setHours(this.hoursEl.nativeElement.value);
+    dateObj.setMinutes(this.minutesEl.nativeElement.value);
+    dateObj.setSeconds(this.showSeconds() ? this.secondsEl.nativeElement.value : 0);
+  }
+
+  showSeconds(): boolean {
+    return this.options.timeFormat.includes(':s'); // also covers :ss
   }
 
   selectDate(e: MouseEvent, index: number): void {
     e.preventDefault();
     let selectedDate: Date = this.days[index].date;
+    let mergeTime = (dateObj: Date) => {
+        selectedDate.setHours(dateObj.getHours());
+        selectedDate.setMinutes(dateObj.getMinutes());
+        selectedDate.setSeconds(dateObj.getSeconds());
+    };
     if ((this.opened === 'from' && dateFns.isAfter(selectedDate, this.dateTo)) ||
       (this.opened === 'to' && dateFns.isBefore(selectedDate, this.dateFrom))) {
       return;
     }
 
     if (this.opened === 'from') {
+      mergeTime(this.dateFrom);
       this.dateFrom = selectedDate;
       this.opened = 'to';
     } else if (this.opened === 'to') {
+      mergeTime(this.dateTo);
       this.dateTo = selectedDate;
       this.opened = 'from';
     }
@@ -227,7 +287,10 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   @HostListener('document:click', ['$event'])
   handleBlurClick(e: MouseEvent) {
     let target = e.srcElement || e.target;
-    if (!this.elementRef.nativeElement.contains(e.target) && !(<Element>target).classList.contains('day-num')) {
+    if (!this.elementRef.nativeElement.contains(e.target) &&
+        !(<Element>target).classList.contains('day-num') &&
+        !(<Element>target).classList.contains('time-link') &&
+        !(<Element>target).classList.contains('time-svg')) {
       this.opened = false;
     }
   }

@@ -94,6 +94,62 @@
       &:after
         left: 215px
 
+    .timer-container
+      .timer-header
+        width: 100%
+        height: 50px
+        display: flex
+        justify-content: space-between
+        .timer-back-icon
+          display: block
+          width: 12px
+          height: 20px
+          cursor: pointer
+        .time-heading
+          font-size: 17px
+          color: $text
+          margin-bottom: 20px
+      input.time-range
+        -webkit-appearance: none
+        width: 100%
+        height: 5px
+        border-radius: 5px
+        background: lighten($blue, 50%)
+        outline: none
+        padding: 0
+        margin: 0
+        
+        &::-webkit-slider-thumb
+          -webkit-appearance: none
+          appearance: none
+          width: 15px
+          height: 15px
+          border-radius: 50%
+          background: $blue
+          cursor: pointer
+          transition: background .15s ease-in-out
+
+          &:hover
+            background: lighten($blue, 10%)
+
+        &:active::-webkit-slider-thumb
+          background: lighten($blue, 10%)
+
+        &::-moz-range-thumb
+          width: 20px
+          height: 20px
+          border: 0
+          border-radius: 50%
+          background: lighten($blue, 50%)
+          cursor: pointer
+          transition: background .15s ease-in-out
+
+          &:hover 
+            background: lighten($blue, 10%)
+
+        &:active::-moz-range-thumb
+          background: lighten($blue, 10%)
+
     .calendar-container
       display: inline-block
       width: 340px
@@ -227,6 +283,27 @@
       &:after
         border-top-color: $cyan
         border-left-color: $cyan
+      .timer-container
+        input.time-range
+          background: lighten($green, 30%)
+          
+          &::-webkit-slider-thumb
+            background: $green
+
+            &:hover
+              background: lighten($green, 10%)
+
+          &:active::-webkit-slider-thumb
+            background: lighten($green, 10%)
+
+          &::-moz-range-thumb
+            background: $green
+
+            &:hover 
+              background: lighten($green, 10%)
+
+          &:active::-moz-range-thumb
+              background: lighten($green, 30%)
       .calendar-container
         .days
           .day
@@ -257,6 +334,27 @@
       &:after
         border-top-color: $teal
         border-left-color: $teal
+      .timer-container
+        input.time-range
+          background: lighten($teal, 30%)
+          
+          &::-webkit-slider-thumb
+            background: $teal
+
+            &:hover
+              background: lighten($teal, 10%)
+
+          &:active::-webkit-slider-thumb
+            background: lighten($teal, 10%)
+
+          &::-moz-range-thumb
+            background: $teal
+
+            &:hover 
+              background: lighten($teal, 10%)
+
+          &:active::-moz-range-thumb
+              background: lighten($teal, 30%)
       .calendar-container
         .days
           .day
@@ -287,6 +385,27 @@
       &:after
         border-top-color: $cyan
         border-left-color: $cyan
+      .timer-container
+        input.time-range
+          background: lighten($cyan, 30%)
+          
+          &::-webkit-slider-thumb
+            background: $cyan
+
+            &:hover
+              background: lighten($cyan, 10%)
+
+          &:active::-webkit-slider-thumb
+            background: lighten($cyan, 10%)
+
+          &::-moz-range-thumb
+            background: $cyan
+
+            &:hover 
+              background: lighten($cyan, 10%)
+
+          &:active::-moz-range-thumb
+              background: lighten($cyan, 30%)
       .calendar-container
         .days
           .day
@@ -317,6 +436,27 @@
       &:after
         border-top-color: $grape
         border-left-color: $grape
+      .timer-container
+        input.time-range
+          background: lighten($grape, 30%)
+          
+          &::-webkit-slider-thumb
+            background: $grape
+
+            &:hover
+              background: lighten($grape, 10%)
+
+          &:active::-webkit-slider-thumb
+            background: lighten($grape, 10%)
+
+          &::-moz-range-thumb
+            background: $grape
+
+            &:hover 
+              background: lighten($grape, 10%)
+
+          &:active::-moz-range-thumb
+              background: lighten($grape, 30%)
       .calendar-container
         .days
           .day
@@ -347,6 +487,27 @@
       &:after
         border-top-color: $red
         border-left-color: $red
+      .timer-container
+        input.time-range
+          background: lighten($red, 30%)
+          
+          &::-webkit-slider-thumb
+            background: $red
+
+            &:hover
+              background: lighten($red, 10%)
+
+          &:active::-webkit-slider-thumb
+            background: lighten($red, 10%)
+
+          &::-moz-range-thumb
+            background: $red
+
+            &:hover 
+              background: lighten($red, 10%)
+
+          &:active::-moz-range-thumb
+              background: lighten($red, 10%)
       .calendar-container
         .days
           .day
@@ -377,6 +538,27 @@
       &:after
         border-top-color: $gray
         border-left-color: $gray
+      .timer-container
+        input.time-range
+          background: lighten($gray, 50%)
+          
+          &::-webkit-slider-thumb
+            background: $gray
+
+            &:hover
+              background: lighten($gray, 20%)
+
+          &:active::-webkit-slider-thumb
+            background: lighten($gray, 20%)
+
+          &::-moz-range-thumb
+            background: $gray
+
+            &:hover 
+              background: lighten($gray, 20%)
+
+          &:active::-moz-range-thumb
+              background: lighten($gray, 20%)
       .calendar-container
         .days
           .day

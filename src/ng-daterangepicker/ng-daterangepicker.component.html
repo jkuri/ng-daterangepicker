@@ -86,19 +86,19 @@
           </div>
           <div class="time-field">
             <div class="time-label">
-              <span class="time-label-text">Hours</span>
+              <span class="time-label-text">{{options.presetNames[8]}}</span>
             </div>
             <input #hours type="range" class="time-range" min="00" max="23" step="1" [ngModel]="getTimeUnitValue('H')" (change)="onTimeChange()" />
           </div>
           <div class="time-field">
             <div class="time-label">
-              <span class="time-label-text">Minutes</span>
+              <span class="time-label-text">{{options.presetNames[9]}}</span>
             </div>
             <input #minutes type="range" class="time-range" min="00" max="59" step="1" [ngModel]="getTimeUnitValue('m')" (change)="onTimeChange()" />
           </div>
           <div class="time-field" [hidden]="!showSeconds()">
             <div class="time-label">
-              <span class="time-label-text">Seconds</span>
+              <span class="time-label-text">{{options.presetNames[10]}}</span>
             </div>
             <input #seconds type="range" class="time-range" min="00" max="59" step="1" [ngModel]="getTimeUnitValue('s')" (change)="onTimeChange()" />
           </div>

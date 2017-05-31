@@ -1,5 +1,4 @@
-import { ViewChild } from '@angular/core';
-import { Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChanges, SimpleChange, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as dateFns from 'date-fns';
 

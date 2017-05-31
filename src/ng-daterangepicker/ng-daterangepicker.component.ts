@@ -12,7 +12,7 @@ export interface NgDateRangePickerOptions {
   outputFormat: string;
   startOfWeek: number;
   showTime?: boolean;
-  timeFormat?: string;
+  timeFormat?: 'HH:mm:ss' | 'HH:mm';
 }
 
 export interface IDay {

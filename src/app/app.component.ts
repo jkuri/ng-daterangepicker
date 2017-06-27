@@ -17,7 +17,8 @@ export class AppComponent implements OnInit  {
       presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
       dateFormat: 'yMd',
       outputFormat: 'DD/MM/YYYY',
-      startOfWeek: 0
+      startOfWeek: 0,
+      width: 275
     };
   }
 }

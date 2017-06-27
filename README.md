@@ -73,6 +73,7 @@ export interface NgDateRangePickerOptions {
   dateFormat: string;
   outputFormat: string;
   startOfWeek: number;
+  width?: number;
 }
 ```
 

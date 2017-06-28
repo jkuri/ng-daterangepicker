@@ -4,7 +4,7 @@ import * as dateFns from 'date-fns';
 
 export interface NgDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
-  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
+  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'ns';
   dayNames: string[];
   presetNames: string[];
   dateFormat: string;
@@ -48,7 +48,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
   dateTo: Date;
   dayNames: string[];
   days: IDay[];
-  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
+  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'ns';
   defaultOptions: NgDateRangePickerOptions = {
     theme: 'default',
     range: 'tm',
@@ -188,7 +188,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     this.generateCalendar();
   }
 
-  selectRange(range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly'): void {
+  selectRange(range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'ns'): void {
     let today = dateFns.startOfDay(new Date());
 
     switch (range) {
@@ -218,6 +218,8 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
         today = dateFns.subYears(today, 1);
         this.dateFrom = dateFns.startOfYear(today);
         this.dateTo = dateFns.endOfYear(today);
+        break;
+      case 'ns':
         break;
     }
 

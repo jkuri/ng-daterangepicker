@@ -1,12 +1,10 @@
-<div class="ng-daterangepicker"
-     [ngClass]="{ 'is-active': !!opened,
+<div class="ng-daterangepicker" [ngClass]="{ 'is-active': !!opened,
                   'theme-green': options.theme === 'green',
                   'theme-teal': options.theme === 'teal',
                   'theme-cyan': options.theme === 'cyan',
                   'theme-grape': options.theme === 'grape',
                   'theme-red': options.theme === 'red',
-                  'theme-gray': options.theme === 'gray' }"
-     [style.width.px]="options.width">
+                  'theme-gray': options.theme === 'gray' }" [style.width.px]="options.width">
 
   <div class="input-section" (click)="toggleCalendar($event, 'from')">
     <span class="label-txt">{{options.presetNames[6]}}</span>
@@ -53,15 +51,12 @@
         <span class="day-name" *ngFor="let name of dayNames">{{ name }}</span>
       </div>
       <div class="days">
-        <div class="day"
-             *ngFor="let d of days; let i = index;"
-             [ngClass]="{
+        <div class="day" *ngFor="let d of days; let i = index;" [ngClass]="{
                'is-within-range': d.isWithinRange,
                'is-from': d.from,
                'is-to': d.to,
                'is-first-weekday': d.weekday === 1 || d.firstMonthDay,
-               'is-last-weekday': d.weekday === 0 || d.lastMonthDay }"
-             (click)="selectDate($event, i)">
+               'is-last-weekday': d.weekday === 0 || d.lastMonthDay }" (click)="selectDate($event, i)">
           <span *ngIf="d.visible" class="day-num" [class.is-active]="d.from || d.to">{{ d.day }}</span>
         </div>
       </div>
@@ -74,6 +69,7 @@
         <button type="button" class="side-button" (click)="selectRange('lw')" [class.is-active]="range === 'lw'">{{options.presetNames[3]}}</button>
         <button type="button" class="side-button" (click)="selectRange('ty')" [class.is-active]="range === 'ty'">{{options.presetNames[4]}}</button>
         <button type="button" class="side-button" (click)="selectRange('ly')" [class.is-active]="range === 'ly'">{{options.presetNames[5]}}</button>
+        <button *ngIf="options.clearButton" type="button" class="side-button is-clear" (click)="clear()" >Clear</button>
       </div>
       <span class="close-icon" (click)="closeCalendar($event)">
         <svg width="20px" height="20px" viewBox="47 44 20 20" version="1.1">

@@ -11,6 +11,7 @@ export interface NgDateRangePickerOptions {
   outputFormat: string;
   startOfWeek: number;
   width?: number;
+  clearButton? : boolean;
 }
 
 export interface IDay {
@@ -233,5 +234,12 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     if (!this.elementRef.nativeElement.contains(e.target) && !(<Element>target).classList.contains('day-num')) {
       this.opened = false;
     }
+  }
+
+  clear(){
+    this.dateFrom = undefined;
+    this.dateTo = undefined;
+
+    this.generateCalendar();
   }
 }

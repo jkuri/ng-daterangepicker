@@ -43,8 +43,7 @@ export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   selector: 'ngx-daterangepicker',
   templateUrl: 'ngx-daterangepicker.component.html',
   styleUrls: ['ngx-daterangepicker.scss'],
-  providers: [ DATERANGEPICKER_VALUE_ACCESSOR ],
-  encapsulation: ViewEncapsulation.None,
+  providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
 })
 export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() options: NgxDateRangePickerOptions;

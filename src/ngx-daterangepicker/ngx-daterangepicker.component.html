@@ -38,8 +38,8 @@
       </div>
     </div>
     <div class="select-container">
-      <select [class.is-active]="range">
-        <option *ngFor="let rangeVal of availableRanges;let i = index" (click)="selectRange(rangeVal)" [selected]="setSelected(rangeVal)">{{options.presetNames[i]}}</option>
+      <select [class.is-active]="range" [ngModel]="range" (ngModelChange)="selectRange($event)">
+        <option *ngFor="let rangeVal of availableRanges;let i = index" [ngValue]="rangeVal">{{options.presetNames[i]}}</option>
       </select>
     </div>
     <div class="calendar-container">

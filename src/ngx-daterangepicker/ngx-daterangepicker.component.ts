@@ -1,4 +1,7 @@
-import { Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChanges, SimpleChange } from '@angular/core';
+import {
+  Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChanges, SimpleChange,
+  ViewEncapsulation
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as dateFns from 'date-fns';
 
@@ -40,7 +43,8 @@ export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   selector: 'ngx-daterangepicker',
   templateUrl: 'ngx-daterangepicker.component.html',
   styleUrls: ['ngx-daterangepicker.scss'],
-  providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
+  providers: [ DATERANGEPICKER_VALUE_ACCESSOR ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() options: NgxDateRangePickerOptions;

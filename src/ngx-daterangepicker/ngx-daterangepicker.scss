@@ -226,8 +226,8 @@ $media-breakpoint: 720px;
       }
 
       select {
-        width: 80%;
-        margin-top: 2em;
+        width: 90%;
+        margin: 2em 1em 1em;
         border: none;
         padding: 0 .5em;
 
@@ -283,6 +283,67 @@ $media-breakpoint: 720px;
       .calendar-container {
         float: left;
         border-right: 1px solid $border-light;
+      }
+    }
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 100%;
+    height: auto;
+
+    div.input-section {
+      width: 100%;
+
+      &:first-child {
+        border-bottom: 1px solid #D4DADE;
+      }
+    }
+
+    .calendar {
+      &,
+      & .calendar-container {
+        width: 255px;
+      }
+    }
+
+    .calendar {
+      top: 100px;
+
+      &:after {
+        display: none;
+      }
+
+      .select-container {
+        &:after {
+          display: block;
+          text-align: center;
+          content: 'Please select start'
+        }
+      }
+
+      &.is-to {
+        .select-container {
+          &:after {
+            content: 'Please select end'
+          }
+        }
+      }
+
+      .calendar-container {
+        .day-names,
+        .days {
+          width: 230px;
+        }
+
+        .day-names .day-name,
+        .days .day {
+          width: 30px;
+        }
+
+        .action-button {
+          display: block;
+          margin: 1em auto;
+        }
       }
     }
   }

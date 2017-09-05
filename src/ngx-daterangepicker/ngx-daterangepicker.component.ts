@@ -260,8 +260,8 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
         this.dateTo = dateFns.endOfYear(today);
         break;
       case 'l7d':
-        this.dateFrom = dateFns.subDays(today, 6);
-        this.dateTo = dateFns.endOfDay(today);
+        this.dateFrom = dateFns.subDays(today, 7);
+        this.dateTo = today;
         break;
     }
 

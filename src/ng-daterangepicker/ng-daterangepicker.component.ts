@@ -10,6 +10,7 @@ export interface NgDateRangePickerOptions {
   dateFormat: string;
   outputFormat: string;
   startOfWeek: number;
+  dateSeparator: string;
 }
 
 export interface IDay {
@@ -55,7 +56,8 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
     dateFormat: 'yMd',
     outputFormat: 'DD/MM/YYYY',
-    startOfWeek: 0
+    startOfWeek: 0,
+    dateSeparator: '-'
   }
 
   private onTouchedCallback: () => void = () => { };
@@ -143,7 +145,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     }
 
     this.days = prevMonthDays.concat(days);
-    this.value = `${dateFns.format(this.dateFrom, this.options.outputFormat)}-${dateFns.format(this.dateTo, this.options.outputFormat)}`;
+    this.value = `${dateFns.format(this.dateFrom, this.options.outputFormat)}${this.options.dateSeparator}${dateFns.format(this.dateTo, this.options.outputFormat)}`;
   }
 
   toggleCalendar(e: MouseEvent, selection: 'from' | 'to'): void {

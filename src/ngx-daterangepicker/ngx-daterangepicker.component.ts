@@ -145,7 +145,8 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
       };
     });
 
-    const prevMonthDayNum = dateFns.getDay(start) - 1;
+    const prevMonthDayNum = dateFns.getDay(start) !== 0 ? dateFns.getDay(start) - 1 : 6;
+
     let prevMonthDays: IDay[] = [];
     if (prevMonthDayNum > 0) {
       prevMonthDays = Array.from(Array(prevMonthDayNum).keys()).map((i) => {

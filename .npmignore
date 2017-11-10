@@ -1,7 +1,7 @@
 node_modules/
 dist/
 .DS_Store
-src/ngfactory
-lib/
 coverage/
 aot/
+src/
+!src/ng-daterangepicker

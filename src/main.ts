@@ -1,12 +1,6 @@
-import './polyfills';
 import './styles';
-
+import './polyfills';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/';
-import { bootloader } from '@angularclass/hmr';
+import { AppModule } from './app/app.module';
 
-export function app() {
-  return platformBrowserDynamic().bootstrapModule(AppModule);
-}
-
-bootloader(app);
+platformBrowserDynamic().bootstrapModule(AppModule);

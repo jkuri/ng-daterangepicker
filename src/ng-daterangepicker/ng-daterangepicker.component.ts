@@ -121,8 +121,8 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
         isWithinRange: dateFns.isWithinRange(d, this.dateFrom, this.dateTo)
       };
     });
-
-    let prevMonthDayNum = dateFns.getDay(start) - 1;
+    
+    let prevMonthDayNum = dateFns.getDay(start)==0?6:dateFns.getDay(start) - 1;
     let prevMonthDays: IDay[] = [];
     if (prevMonthDayNum > 0) {
       prevMonthDays = Array.from(Array(prevMonthDayNum).keys()).map(i => {

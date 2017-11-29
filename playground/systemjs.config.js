@@ -26,8 +26,9 @@
 
       // other libraries
       rxjs: 'npm:rxjs',
+      'date-fns': 'npm:date-fns',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'kiwigrid-ngx-daterangepicker': '../dist'
+      '@kiwigrid/ngx-daterangepicker': '../dist'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -42,8 +43,12 @@
       rxjs: {
         defaultExtension: 'js'
       },
-      'kiwigrid-ngx-daterangepicker': {
-        main: 'kiwigrid-ngx-daterangepicker.umd.js',
+      'date-fns': {
+        defaultExtension: 'js',
+        main: 'index.js'
+      },
+      '@kiwigrid/ngx-daterangepicker': {
+        main: 'ngx-daterangepicker.umd.js',
         defaultExtension: 'js'
       }
     }

@@ -1,28 +1,35 @@
 {
-  "name": "kiwigrid-ngx-daterangepicker",
-  "version": "0.1.0",
+  "name": "@kiwigrid/ngx-daterangepicker",
+  "description": "Angular Datepicker",
+  "version": "0.4.4",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kiwigrid/ngx-daterangepicker"
+    "url": "git+https://github.com/kiwigrid/ngx-daterangepicker.git"
   },
-  "author": {
-    "name": "Marcel Kilian",
-    "email": "marce.kilian@kiwigrid.com"
-  },
+  "authors": [
+    "Norman Leyda <norman.leyda@kiwigrid.com>",
+    "Marcel Kilian <marcel.kilian@kiwigrid.com>"
+  ],
   "keywords": [
-    "angular"
+    "Angular",
+    "date",
+    "datepicker",
+    "range",
+    "daterange",
+    "daterangepicker"
   ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kiwigrid/ngx-daterangepicker/issues"
   },
-  "main": "kiwigrid-ngx-daterangepicker.umd.js",
-  "module": "kiwigrid-ngx-daterangepicker.js",
-  "jsnext:main": "kiwigrid-ngx-daterangepicker.js",
-  "typings": "kiwigrid-ngx-daterangepicker.d.ts",
+  "main": "ngx-daterangepicker.umd.js",
+  "module": "ngx-daterangepicker.js",
+  "jsnext:main": "ngx-daterangepicker.js",
+  "typings": "ngx-daterangepicker.d.ts",
   "peerDependencies": {
     "@angular/core": "^4.0.0",
-    "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "@angular/common": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "date-fns": "^1.28.0"
   }
 }

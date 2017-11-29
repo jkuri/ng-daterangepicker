@@ -1,72 +1,106 @@
-# kiwigrid-ngx-daterangepicker
+Angular DateRange Picker
+---
 
-## Installation
+This date range picker based on https://github.com/jkuri/ng-daterangepicker.
 
-To install this library, run:
+### Installation
 
-```bash
-$ npm install kiwigrid-ngx-daterangepicker --save
+```sh
+npm install @kiwigrid/ngx-daterangepicker --save
 ```
 
-## Consuming your library
+or
 
-Once you have published your library to npm, you can import your library in any Angular application by running:
-
-```bash
-$ npm install kiwigrid-ngx-daterangepicker
+```sh
+yarn add @kiwigrid/ngx-daterangepicker --save
 ```
 
-and then from your Angular `AppModule`:
+### Example
 
-```typescript
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+```ts
+import { NgxDateRangePickerModule } from '@kiwigrid/ngx-daterangepicker';
 
-import { AppComponent } from './app.component';
-
-// Import your library
-import { SampleModule } from 'kiwigrid-ngx-daterangepicker';
-
+// app.module.ts
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-
-    // Specify your library as an import
-    LibraryModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  ...
+  imports: [ ..., NgxDateRangePickerModule, ... ],
+  ...
 })
 export class AppModule { }
 ```
 
-Once your library is imported, you can use its components, directives and pipes in your Angular application:
+```ts
+// app.component.ts
+import { Component, OnInit } from '@angular/core';
+import { NgxDateRangePickerOptions, NgxDateRangePickerOutput } from '@kiwigrid/ngx-daterangepicker';
 
-```xml
-<!-- You can now use your library component in app.component.html -->
-<h1>
-  {{title}}
-</h1>
-<sampleComponent></sampleComponent>
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html'
+})
+export class AppComponent {
+  value: NgxDateRangePickerOutput;
+  options: NgxDateRangePickerOptions;
+
+
+  ngOnInit() {
+    this.options = {
+	  theme: 'default',
+	  range: 'tm',
+	  dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+	  presetNames: [
+	   'This Month',
+	   'Last Month',
+	   'This Week',
+	   'Last Week',
+	   'This Year',
+	   'Last Year',
+	   'Last 7 Days',
+	   'Start',
+	   'End',
+	   'Apply',
+	   'Cancel'
+	  ],
+	  dateFormat: 'yMd',
+	  startOfWeek: 1,
+	  position: 'right'
+	};
+	this.value = {
+  		from: 0,
+		to: 0
+	};
+  }
+}
 ```
 
-## Development
-
-To generate all `*.js`, `*.d.ts` and `*.metadata.json` files:
-
-```bash
-$ npm run build
+```html
+<!-- app.component.html -->
+<ngx-daterangepicker [(ngModel)]="value" [options]="options"></ngx-daterangepicker>
 ```
 
-To lint all `*.ts` files:
+### Configuration
 
-```bash
-$ npm run lint
+```ts
+export interface NgxDateRangePickerOptions {
+	theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
+	range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
+    dayNames: string[];
+    presetNames: string[];
+    dateFormat: string;
+    startOfWeek: number;
+    position: string;
+}
 ```
 
-## License
+### Running the demo
 
-MIT © [Marcel Kilian](mailto:marce.kilian@kiwigrid.com)
+```sh
+git clone https://github.com/kiwigrid/ngx-daterangepicker.git
+cd ngx-daterangepicker
+npm install
+npm run playground
+```
+
+### Licence
+
+MIT

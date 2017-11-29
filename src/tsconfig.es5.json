@@ -21,8 +21,8 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
-    "flatModuleOutFile": "kiwigrid-ngx-daterangepicker.js",
-    "flatModuleId": "kiwigrid-ngx-daterangepicker"
+    "flatModuleOutFile": "ngx-daterangepicker.js",
+    "flatModuleId": "ngx-daterangepicker"
   },
   "files": [
     "./index.ts"

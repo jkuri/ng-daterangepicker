@@ -13,8 +13,8 @@
     "lite": "lite-server",
 		"sass:build": "node-sass --include-path playground/styles/ playground/styles/app.scss playground/app.component.css",
     "sass:watch": "node-sass -w --include-path playground/styles/ playground/styles/app.scss playground/app.component.css",
-    "playground:build": "tsc -p playground -w && npm run sass:build",
-    "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run sass:watch\" \"npm run lite\"",
+    "playground:build": "tsc -p playground -w",
+    "playground": "npm run sass:build && concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run sass:watch\" \"npm run lite\"",
     "test": "tsc && karma start",
     "prepublish": "npm run build"
   },

@@ -39,7 +39,7 @@ class AppComponent {
       'Apply',
       'Cancel'
     ],
-    dateFormat: 'yMd',
+    dateFormat: 'd.M.y',
     startOfWeek: 1,
     position: 'left'
   };

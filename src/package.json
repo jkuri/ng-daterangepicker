@@ -1,7 +1,7 @@
 {
   "name": "@kiwigrid/ngx-daterangepicker",
   "description": "Angular Datepicker",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiwigrid/ngx-daterangepicker.git"

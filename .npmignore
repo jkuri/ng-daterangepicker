@@ -1,10 +1,34 @@
-node_modules/
-dist/
-.DS_Store
-src/ngfactory
-lib/
-coverage/
-aot/
+# Node
+node_modules/*
+npm-debug.log
+docs/*
+# DO NOT IGNORE TYPESCRIPT FILES FOR NPM
+# TypeScript
+# *.js
+# *.map
+# *.d.ts
+
+# JetBrains
 .idea
-e2e
-yarn-error.log
+.project
+.settings
+.idea/*
+*.iml
+
+# VS Code
+.vscode/*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Ngc generated files
+**/*.ngfactory.ts
+
+# Library files
+src/*
+build/*

@@ -1,16 +1,37 @@
-.idea
-node_modules/
-dist/
-.DS_Store
-src/ngfactory
-lib/
-coverage/
-aot/
-bundles/
-**/*.js
-**/*.d.ts
-**/*.metadata.json
-yarn-error.log
+# Node
+node_modules/*
+npm-debug.log
+.npmrc
 
-!config/**/*.js
-!config/**/*.json
+# TypeScript
+src/*.js
+src/*.map
+src/*.d.ts
+
+# JetBrains
+.idea
+.project
+.settings
+.idea/*
+*.iml
+
+# VS Code
+.vscode/*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Ngc generated files
+**/*.ngfactory.ts
+
+# Build files
+dist/*
+
+# Playground tmp files
+.playground
+playground/app.component.css

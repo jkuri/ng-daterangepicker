@@ -95,9 +95,10 @@ export interface NgxDateRangePickerOptions {
 ### Running the demo
 
 ```sh
-git clone https://github.com/kiwigrid/ngx-daterangepicker.git --depth 1
+git clone https://github.com/kiwigrid/ngx-daterangepicker.git
 cd ngx-daterangepicker
-npm start
+npm install
+npm run playground
 ```
 
 ### Licence

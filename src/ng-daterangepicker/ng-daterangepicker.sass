@@ -391,3 +391,35 @@
             border-color: $gray
             &:hover, &.is-active
               background: $gray
+  
+
+  &.theme-orange
+    &.is-active
+      border-color: $orange
+    .input-section
+      .label-txt
+        color: $orange
+      .cal-icon
+        svg
+          path
+            fill: $orange
+    .calendar
+      border-color: $orange
+      &:after
+        border-top-color: $orange
+        border-left-color: $orange
+      .calendar-container
+        .days
+          .day
+            &.is-within-range
+              background: lighten($orange, 20)
+            .day-num
+              &:hover, &.is-active
+                background: $orange
+      .side-container
+        .side-container-buttons
+          .side-button
+            border-color: $orange
+            &:hover, &.is-active
+              background: $orange
+

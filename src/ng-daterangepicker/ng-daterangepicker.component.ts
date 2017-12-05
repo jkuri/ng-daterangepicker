@@ -3,13 +3,14 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as dateFns from 'date-fns';
 
 export interface NgDateRangePickerOptions {
-  theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
+  theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray' | 'orange';
   range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly';
   dayNames: string[];
   presetNames: string[];
   dateFormat: string;
   outputFormat: string;
   startOfWeek: number;
+  dateSeparator: string;
 }
 
 export interface IDay {
@@ -55,7 +56,8 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
     dateFormat: 'yMd',
     outputFormat: 'DD/MM/YYYY',
-    startOfWeek: 0
+    startOfWeek: 0,
+    dateSeparator: '-'
   }
 
   private onTouchedCallback: () => void = () => { };
@@ -143,7 +145,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
     }
 
     this.days = prevMonthDays.concat(days);
-    this.value = `${dateFns.format(this.dateFrom, this.options.outputFormat)}-${dateFns.format(this.dateTo, this.options.outputFormat)}`;
+    this.value = `${dateFns.format(this.dateFrom, this.options.outputFormat)}${this.options.dateSeparator}${dateFns.format(this.dateTo, this.options.outputFormat)}`;
   }
 
   toggleCalendar(e: MouseEvent, selection: 'from' | 'to'): void {
@@ -189,32 +191,37 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
 
   selectRange(range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly'): void {
     let today = dateFns.startOfDay(new Date());
-
+    // set current year, this is overwritten only in 'Last year' selection
+    dateFns.setYear(today, today.getFullYear());
     switch (range) {
       case 'tm':
+        this.date = dateFns.setMonth(today, today.getMonth());
         this.dateFrom = dateFns.startOfMonth(today);
         this.dateTo = dateFns.endOfMonth(today);
         break;
       case 'lm':
-        today = dateFns.subMonths(today, 1);
+        this.date = today = dateFns.subMonths(today, 1);
         this.dateFrom = dateFns.startOfMonth(today);
         this.dateTo = dateFns.endOfMonth(today);
         break;
       case 'lw':
         today = dateFns.subWeeks(today, 1);
+        this.date = today;
         this.dateFrom = dateFns.startOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         this.dateTo = dateFns.endOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         break;
       case 'tw':
+        this.date = dateFns.setMonth(today, today.getMonth());
         this.dateFrom = dateFns.startOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         this.dateTo = dateFns.endOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         break;
       case 'ty':
+        this.date = dateFns.setYear(today, today.getFullYear());
         this.dateFrom = dateFns.startOfYear(today);
         this.dateTo = dateFns.endOfYear(today);
         break;
       case 'ly':
-        today = dateFns.subYears(today, 1);
+        this.date = today = dateFns.subYears(today, 1);
         this.dateFrom = dateFns.startOfYear(today);
         this.dateTo = dateFns.endOfYear(today);
         break;

@@ -11,7 +11,7 @@
     "docs:watch": "npm run docs:build -- -s -w",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
     "lite": "lite-server",
-		"sass:build": "node-sass --include-path playground/styles/ playground/styles/app.scss playground/app.component.css",
+    "sass:build": "node-sass --include-path playground/styles/ playground/styles/app.scss playground/app.component.css",
     "sass:watch": "node-sass -w --include-path playground/styles/ playground/styles/app.scss playground/app.component.css",
     "playground:build": "tsc -p playground -w",
     "playground": "npm run sass:build && concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run sass:watch\" \"npm run lite\"",

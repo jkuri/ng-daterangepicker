@@ -33,8 +33,8 @@ export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
 
 @Component({
   selector: 'ng-daterangepicker',
-  templateUrl: 'ng-daterangepicker.component.html',
-  styleUrls: ['ng-daterangepicker.sass'],
+  templateUrl: './ng-daterangepicker.component.html',
+  styleUrls: ['./ng-daterangepicker.component.sass'],
   providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
 })
 export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
@@ -121,7 +121,7 @@ export class NgDateRangePickerComponent implements ControlValueAccessor, OnInit,
         isWithinRange: dateFns.isWithinRange(d, this.dateFrom, this.dateTo)
       };
     });
-    
+
     let prevMonthDayNum = dateFns.getDay(start) == 0 ? 6 : dateFns.getDay(start) - 1;
     let prevMonthDays: IDay[] = [];
     if (prevMonthDayNum > 0) {

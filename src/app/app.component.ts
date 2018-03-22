@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgDateRangePickerOptions } from '../ng-daterangepicker';
+import { NgDateRangePickerOptions } from './ng-daterangepicker/ng-daterangepicker.component';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit  {
+export class AppComponent implements OnInit {
   value: string;
   options: NgDateRangePickerOptions;
 

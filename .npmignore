@@ -1,7 +1,0 @@
-node_modules/
-dist/
-.DS_Store
-coverage/
-aot/
-src/
-!src/ng-daterangepicker

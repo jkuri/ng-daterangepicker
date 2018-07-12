@@ -1,13 +1,21 @@
-import {
-  Component, OnInit, HostListener, ElementRef, forwardRef, Input, OnChanges, SimpleChange,
-  ViewEncapsulation
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Component, ElementRef, forwardRef, HostListener, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as dateFns from 'date-fns';
+
+export type TimeRangeEnum = 'TM' | 'LM' | 'LW' | 'TW' | 'TY' | 'LY' | 'L7D';
+export const TimeRangeEnum = {
+  THIS_WEEK: 'TW' as TimeRangeEnum,
+  LAST_SEVEN_DAYS: 'L7D' as TimeRangeEnum,
+  LAST_WEEK: 'LW' as TimeRangeEnum,
+  THIS_MONTH: 'TM' as TimeRangeEnum,
+  LAST_MONTH: 'LM' as TimeRangeEnum,
+  THIS_YEAR: 'TY' as TimeRangeEnum,
+  LAST_YEAR: 'LY' as TimeRangeEnum
+}
 
 export interface NgxDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
-  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'l7d';
+  range: TimeRangeEnum;
   dayNames: string[];
   presetNames: string[];
   dateFormat: string;
@@ -55,19 +63,19 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
   dateTo: Date;
   dayNames: string[];
   days: IDay[];
-  range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'l7d';
+  range: TimeRangeEnum;
   defaultOptions: NgxDateRangePickerOptions = {
     theme: 'default',
-    range: 'tm',
+    range: TimeRangeEnum.THIS_MONTH,
     dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     presetNames: [
+      'This Week',
+      'Last 7 Days',
+      'Last Week',
       'This Month',
       'Last Month',
-      'This Week',
-      'Last Week',
       'This Year',
       'Last Year',
-      'Last 7 Days',
       'Start',
       'End',
       'Apply',
@@ -77,9 +85,17 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
     startOfWeek: 0,
     position: 'left'
   };
-  availableRanges: string[] = ['tm', 'lm', 'tw', 'lw', 'ty', 'ly', 'l7d'];
+  availableRanges: string[] = [
+    TimeRangeEnum.THIS_WEEK,
+    TimeRangeEnum.LAST_SEVEN_DAYS,
+    TimeRangeEnum.LAST_WEEK,
+    TimeRangeEnum.THIS_MONTH,
+    TimeRangeEnum.LAST_MONTH,
+    TimeRangeEnum.THIS_YEAR,
+    TimeRangeEnum.LAST_YEAR
+  ];
   openerDates: Date[] = [null, null];
-  openerRange: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'l7d';
+  openerRange: TimeRangeEnum;
 
   private onTouchedCallback: () => void = () => { };
   private onChangeCallback: (_: any) => void = () => { };
@@ -227,40 +243,40 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
     this.generateCalendar();
   }
 
-  selectRange(range: 'tm' | 'lm' | 'lw' | 'tw' | 'ty' | 'ly' | 'l7d'): void {
+  selectRange(range: TimeRangeEnum): void {
     let today = dateFns.startOfDay(new Date());
 
     this.range = range;
 
     switch (this.range) {
-      case 'tm':
+      case TimeRangeEnum.THIS_MONTH:
         this.dateFrom = dateFns.startOfMonth(today);
         this.dateTo = dateFns.endOfMonth(today);
         break;
-      case 'lm':
+      case TimeRangeEnum.LAST_MONTH:
         today = dateFns.subMonths(today, 1);
         this.dateFrom = dateFns.startOfMonth(today);
         this.dateTo = dateFns.endOfMonth(today);
         break;
-      case 'lw':
+      case TimeRangeEnum.LAST_WEEK:
         today = dateFns.subWeeks(today, 1);
         this.dateFrom = dateFns.startOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         this.dateTo = dateFns.endOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         break;
-      case 'tw':
+      case TimeRangeEnum.THIS_WEEK:
         this.dateFrom = dateFns.startOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         this.dateTo = dateFns.endOfWeek(today, {weekStartsOn: this.options.startOfWeek});
         break;
-      case 'ty':
+      case TimeRangeEnum.THIS_YEAR:
         this.dateFrom = dateFns.startOfYear(today);
         this.dateTo = dateFns.endOfYear(today);
         break;
-      case 'ly':
+      case TimeRangeEnum.LAST_YEAR:
         today = dateFns.subYears(today, 1);
         this.dateFrom = dateFns.startOfYear(today);
         this.dateTo = dateFns.endOfYear(today);
         break;
-      case 'l7d':
+      case TimeRangeEnum.LAST_SEVEN_DAYS:
         this.dateFrom = dateFns.subDays(today, 7);
         this.dateTo = today;
         break;

@@ -2,14 +2,15 @@
  * This is only for local test
  */
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component, ViewEncapsulation } from '@angular/core';
+import { Component, NgModule, ViewEncapsulation } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import {
   NgxDateRangePickerModule,
+  NgxDateRangePickerOptions,
   NgxDateRangePickerOutput,
-  NgxDateRangePickerOptions
-} from '@kiwigrid/ngx-daterangepicker';
+  TimeRangeEnum
+} from '../src/index';
 
 @Component({
   styleUrls: ['app.component.css'],
@@ -24,16 +25,16 @@ class AppComponent {
   };
   options: NgxDateRangePickerOptions = {
     theme: 'default',
-    range: 'l7d',
+    range: TimeRangeEnum.LAST_SEVEN_DAYS,
     dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     presetNames: [
+      'This Week',
+      'Last 7 Days',
+      'Last Week',
       'This Month',
       'Last Month',
-      'This Week',
-      'Last Week',
       'This Year',
       'Last Year',
-      'Last 7 Days',
       'Start',
       'End',
       'Apply',

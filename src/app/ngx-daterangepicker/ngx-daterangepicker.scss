@@ -1,14 +1,14 @@
 @charset "utf8";
 
-$white: #FFFFFF;
+$white: #ffffff;
 $black: #000000;
 
 $text: #2c2e2f;
-$text-button: #58585A;
+$text-button: #58585a;
 $grey: #929395;
 $dark: #333333;
 $border: #9da3a6;
-$border-light: #D4DADE;
+$border-light: #d4dade;
 $blue: #0066aa;
 $blue-light: #a6cae1;
 $blue-icon: #0066aa;
@@ -58,8 +58,9 @@ $media-breakpoint: 720px;
       border-right: 1px solid $border-light;
     }
 
-    .label-txt, .value-txt {
-      display: block
+    .label-txt,
+    .value-txt {
+      display: block;
     }
 
     .label-txt {
@@ -70,7 +71,7 @@ $media-breakpoint: 720px;
     .value-txt {
       color: $text;
       font-size: 13px;
-      border-bottom: 1px solid transparent
+      border-bottom: 1px solid transparent;
     }
 
     .cal-icon {
@@ -212,7 +213,8 @@ $media-breakpoint: 720px;
             height: 100%;
             padding: 10px 15px;
 
-            &:hover, &.is-active {
+            &:hover,
+            &.is-active {
               background: $blue;
               color: $white;
             }
@@ -249,7 +251,7 @@ $media-breakpoint: 720px;
         width: 90%;
         margin: 2em 1em 1em;
         border: none;
-        padding: 0 .5em;
+        padding: 0 0.5em;
 
         &.is-active {
           background: $blue;
@@ -257,7 +259,7 @@ $media-breakpoint: 720px;
         }
 
         option {
-          padding: .5em;
+          padding: 0.5em;
           background: $white;
           color: $black;
         }
@@ -277,7 +279,8 @@ $media-breakpoint: 720px;
       font-size: 13px;
       cursor: pointer;
 
-      &:hover, &.is-active {
+      &:hover,
+      &.is-active {
         background: $blue;
         color: $white;
       }
@@ -315,7 +318,7 @@ $media-breakpoint: 720px;
       width: 100%;
 
       &:first-child {
-        border-bottom: 1px solid #D4DADE;
+        border-bottom: 1px solid #d4dade;
       }
     }
 
@@ -337,14 +340,14 @@ $media-breakpoint: 720px;
         &:after {
           display: block;
           text-align: center;
-          content: 'Please select start'
+          content: 'Please select start';
         }
       }
 
       &.is-to {
         .select-container {
           &:after {
-            content: 'Please select end'
+            content: 'Please select end';
           }
         }
       }
@@ -402,7 +405,8 @@ $media-breakpoint: 720px;
             }
 
             .day-num {
-              &:hover, &.is-active {
+              &:hover,
+              &.is-active {
                 background: $green;
               }
             }
@@ -415,8 +419,9 @@ $media-breakpoint: 720px;
           .side-button {
             border-color: $green;
 
-            &:hover, &.is-active {
-              background: $green
+            &:hover,
+            &.is-active {
+              background: $green;
             }
           }
         }
@@ -458,7 +463,8 @@ $media-breakpoint: 720px;
             }
 
             .day-num {
-              &:hover, &.is-active {
+              &:hover,
+              &.is-active {
                 background: $teal;
               }
             }
@@ -471,8 +477,9 @@ $media-breakpoint: 720px;
           .side-button {
             border-color: $teal;
 
-            &:hover, &.is-active {
-              background: $teal
+            &:hover,
+            &.is-active {
+              background: $teal;
             }
           }
         }
@@ -514,7 +521,8 @@ $media-breakpoint: 720px;
             }
 
             .day-num {
-              &:hover, &.is-active {
+              &:hover,
+              &.is-active {
                 background: $cyan;
               }
             }
@@ -527,8 +535,9 @@ $media-breakpoint: 720px;
           .side-button {
             border-color: $cyan;
 
-            &:hover, &.is-active {
-              background: $cyan
+            &:hover,
+            &.is-active {
+              background: $cyan;
             }
           }
         }
@@ -570,7 +579,8 @@ $media-breakpoint: 720px;
             }
 
             .day-num {
-              &:hover, &.is-active {
+              &:hover,
+              &.is-active {
                 background: $grape;
               }
             }
@@ -583,8 +593,9 @@ $media-breakpoint: 720px;
           .side-button {
             border-color: $grape;
 
-            &:hover, &.is-active {
-              background: $grape
+            &:hover,
+            &.is-active {
+              background: $grape;
             }
           }
         }
@@ -626,7 +637,8 @@ $media-breakpoint: 720px;
             }
 
             .day-num {
-              &:hover, &.is-active {
+              &:hover,
+              &.is-active {
                 background: $red;
               }
             }
@@ -639,8 +651,9 @@ $media-breakpoint: 720px;
           .side-button {
             border-color: $red;
 
-            &:hover, &.is-active {
-              background: $red
+            &:hover,
+            &.is-active {
+              background: $red;
             }
           }
         }
@@ -682,7 +695,8 @@ $media-breakpoint: 720px;
             }
 
             .day-num {
-              &:hover, &.is-active {
+              &:hover,
+              &.is-active {
                 background: $gray;
               }
             }
@@ -695,8 +709,9 @@ $media-breakpoint: 720px;
           .side-button {
             border-color: $gray;
 
-            &:hover, &.is-active {
-              background: $gray
+            &:hover,
+            &.is-active {
+              background: $gray;
             }
           }
         }

@@ -1,6 +1,41 @@
-import { Component, ElementRef, forwardRef, HostListener, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  forwardRef,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChange,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as dateFns from 'date-fns';
+import {
+  addDays,
+  addMonths,
+  eachDayOfInterval,
+  endOfDay,
+  endOfMonth,
+  endOfWeek,
+  endOfYear,
+  getDate,
+  getDay,
+  isAfter,
+  isBefore,
+  isEqual,
+  isFirstDayOfMonth,
+  isLastDayOfMonth,
+  isSameDay,
+  isToday,
+  isWithinInterval,
+  startOfDay,
+  startOfMonth,
+  startOfWeek,
+  startOfYear,
+  subDays,
+  subMonths,
+  subWeeks,
+  subYears,
+} from 'date-fns';
 
 export type TimeRangeEnum = 'TM' | 'LM' | 'LW' | 'TW' | 'TY' | 'LY' | 'L7D';
 export const TimeRangeEnum = {
@@ -10,8 +45,8 @@ export const TimeRangeEnum = {
   THIS_MONTH: 'TM' as TimeRangeEnum,
   LAST_MONTH: 'LM' as TimeRangeEnum,
   THIS_YEAR: 'TY' as TimeRangeEnum,
-  LAST_YEAR: 'LY' as TimeRangeEnum
-}
+  LAST_YEAR: 'LY' as TimeRangeEnum,
+};
 
 export interface NgxDateRangePickerOptions {
   theme: 'default' | 'green' | 'teal' | 'cyan' | 'grape' | 'red' | 'gray';
@@ -19,7 +54,7 @@ export interface NgxDateRangePickerOptions {
   dayNames: string[];
   presetNames: string[];
   dateFormat: string;
-  startOfWeek: number;
+  startOfWeek: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   position: string;
 }
 
@@ -44,17 +79,18 @@ export interface NgxDateRangePickerOutput {
 export let DATERANGEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => NgxDateRangePickerComponent),
-  multi: true
+  multi: true,
 };
 
 @Component({
   selector: 'ngx-daterangepicker',
   templateUrl: 'ngx-daterangepicker.component.html',
   styleUrls: ['ngx-daterangepicker.scss'],
-  providers: [ DATERANGEPICKER_VALUE_ACCESSOR ]
+  providers: [DATERANGEPICKER_VALUE_ACCESSOR],
 })
-export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit, OnChanges {
-  @Input() options: NgxDateRangePickerOptions;
+export class NgxDateRangePickerComponent
+  implements ControlValueAccessor, OnInit, OnChanges {
+  @Input() options: Partial<NgxDateRangePickerOptions>;
 
   modelValue: NgxDateRangePickerOutput;
   opened: false | 'from' | 'to';
@@ -79,11 +115,11 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
       'Start',
       'End',
       'Apply',
-      'Cancel'
+      'Cancel',
     ],
     dateFormat: 'yMd',
     startOfWeek: 0,
-    position: 'left'
+    position: 'left',
   };
   availableRanges: string[] = [
     TimeRangeEnum.THIS_WEEK,
@@ -92,48 +128,52 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
     TimeRangeEnum.THIS_MONTH,
     TimeRangeEnum.LAST_MONTH,
     TimeRangeEnum.THIS_YEAR,
-    TimeRangeEnum.LAST_YEAR
+    TimeRangeEnum.LAST_YEAR,
   ];
   openerDates: Date[] = [null, null];
   openerRange: TimeRangeEnum;
 
-  private onTouchedCallback: () => void = () => { };
-  private onChangeCallback: (_: any) => void = () => { };
+  private onTouchedCallback: () => void = () => {};
+  private onChangeCallback: (_: any) => void = () => {};
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {}
 
   get value(): NgxDateRangePickerOutput {
     return this.modelValue;
   }
 
   set value(value: NgxDateRangePickerOutput) {
-    if (!value) { return; }
+    if (!value) {
+      return;
+    }
     this.modelValue = value;
     this.onChangeCallback(value);
   }
 
-  writeValue(value: NgxDateRangePickerOutput) {
-    if (!value) { return; }
+  writeValue(value: NgxDateRangePickerOutput): void {
+    if (!value) {
+      return;
+    }
     this.modelValue = value;
   }
 
-  registerOnChange(fn: any) {
+  registerOnChange(fn: any): void {
     this.onChangeCallback = fn;
   }
 
-  registerOnTouched(fn: any) {
+  registerOnTouched(fn: any): void {
     this.onTouchedCallback = fn;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.opened = false;
-    this.date = dateFns.startOfDay(new Date());
+    this.date = startOfDay(new Date());
     this.options = Object.assign({}, this.defaultOptions, this.options);
     this.initNames();
     this.selectRange(this.options.range);
   }
 
-  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
+  ngOnChanges(changes: { [propName: string]: SimpleChange }): void {
     this.options = Object.assign({}, this.defaultOptions, this.options);
   }
 
@@ -143,41 +183,44 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
 
   generateCalendar(): void {
     this.days = [];
-    const start: Date = dateFns.startOfMonth(this.date);
-    const end: Date = dateFns.endOfMonth(this.date);
+    const start: Date = startOfMonth(this.date);
+    const end: Date = endOfMonth(this.date);
 
-    const days: IDay[] = dateFns.eachDay(start, end).map((d) => {
+    const days: IDay[] = eachDayOfInterval({ start, end }).map((d) => {
       return {
         date: d,
-        day: dateFns.getDate(d),
-        weekday: dateFns.getDay(d),
-        today: dateFns.isToday(d),
-        firstMonthDay: dateFns.isFirstDayOfMonth(d),
-        lastMonthDay: dateFns.isLastDayOfMonth(d),
+        day: getDate(d),
+        weekday: getDay(d),
+        today: isToday(d),
+        firstMonthDay: isFirstDayOfMonth(d),
+        lastMonthDay: isLastDayOfMonth(d),
         visible: true,
-        from: dateFns.isSameDay(this.dateFrom, d),
-        to: dateFns.isSameDay(this.dateTo, d),
-        isWithinRange: dateFns.isWithinRange(d, this.dateFrom, this.dateTo)
+        from: isSameDay(this.dateFrom, d),
+        to: isSameDay(this.dateTo, d),
+        isWithinRange: isWithinInterval(d, {
+          start: this.dateFrom,
+          end: this.dateTo,
+        }),
       };
     });
 
-    const prevMonthDayNum = dateFns.getDay(start) !== 0 ? dateFns.getDay(start) - 1 : 6;
+    const prevMonthDayNum = getDay(start) !== 0 ? getDay(start) - 1 : 6;
 
     let prevMonthDays: IDay[] = [];
     if (prevMonthDayNum > 0) {
       prevMonthDays = Array.from(Array(prevMonthDayNum).keys()).map((i) => {
-        const d = dateFns.subDays(start, prevMonthDayNum - i);
+        const d = subDays(start, prevMonthDayNum - i);
         return {
           date: d,
-          day: dateFns.getDate(d),
-          weekday: dateFns.getDay(d),
-          firstMonthDay: dateFns.isFirstDayOfMonth(d),
-          lastMonthDay: dateFns.isLastDayOfMonth(d),
+          day: getDate(d),
+          weekday: getDay(d),
+          firstMonthDay: isFirstDayOfMonth(d),
+          lastMonthDay: isLastDayOfMonth(d),
           today: false,
           visible: false,
           from: false,
           to: false,
-          isWithinRange: false
+          isWithinRange: false,
         };
       });
     }
@@ -205,27 +248,27 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
     const selectedDate: Date = this.days[index].date;
 
     if (this.opened === 'from') {
-      if (dateFns.isAfter(selectedDate, this.dateTo)) {
+      if (isAfter(selectedDate, this.dateTo)) {
         this.dateFrom = selectedDate;
-        this.dateTo = dateFns.endOfDay(selectedDate);
+        this.dateTo = endOfDay(selectedDate);
         this.opened = 'to';
       } else {
         this.dateFrom = selectedDate;
         this.opened = 'to';
       }
     } else if (this.opened === 'to') {
-      if (dateFns.isBefore(selectedDate, this.dateFrom)) {
-        this.dateTo = dateFns.endOfDay(selectedDate);
-        this.dateFrom = dateFns.startOfDay(selectedDate);
+      if (isBefore(selectedDate, this.dateFrom)) {
+        this.dateTo = endOfDay(selectedDate);
+        this.dateFrom = startOfDay(selectedDate);
         this.opened = 'from';
       } else {
-        this.dateTo = dateFns.endOfDay(selectedDate);
+        this.dateTo = endOfDay(selectedDate);
         this.opened = 'from';
       }
     }
 
-    if (dateFns.isEqual(this.dateFrom, this.dateTo)) {
-      this.dateTo = dateFns.addDays(this.dateFrom, 1);
+    if (isEqual(this.dateFrom, this.dateTo)) {
+      this.dateTo = addDays(this.dateFrom, 1);
       this.opened = 'to';
     }
 
@@ -234,50 +277,58 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
   }
 
   prevMonth(): void {
-    this.date = dateFns.subMonths(this.date, 1);
+    this.date = subMonths(this.date, 1);
     this.generateCalendar();
   }
 
   nextMonth(): void {
-    this.date = dateFns.addMonths(this.date, 1);
+    this.date = addMonths(this.date, 1);
     this.generateCalendar();
   }
 
   selectRange(range: TimeRangeEnum): void {
-    let today = dateFns.startOfDay(new Date());
+    let today = startOfDay(new Date());
 
     this.range = range;
 
     switch (this.range) {
       case TimeRangeEnum.THIS_MONTH:
-        this.dateFrom = dateFns.startOfMonth(today);
-        this.dateTo = dateFns.endOfMonth(today);
+        this.dateFrom = startOfMonth(today);
+        this.dateTo = endOfMonth(today);
         break;
       case TimeRangeEnum.LAST_MONTH:
-        today = dateFns.subMonths(today, 1);
-        this.dateFrom = dateFns.startOfMonth(today);
-        this.dateTo = dateFns.endOfMonth(today);
+        today = subMonths(today, 1);
+        this.dateFrom = startOfMonth(today);
+        this.dateTo = endOfMonth(today);
         break;
       case TimeRangeEnum.LAST_WEEK:
-        today = dateFns.subWeeks(today, 1);
-        this.dateFrom = dateFns.startOfWeek(today, {weekStartsOn: this.options.startOfWeek});
-        this.dateTo = dateFns.endOfWeek(today, {weekStartsOn: this.options.startOfWeek});
+        today = subWeeks(today, 1);
+        this.dateFrom = startOfWeek(today, {
+          weekStartsOn: this.options.startOfWeek,
+        });
+        this.dateTo = endOfWeek(today, {
+          weekStartsOn: this.options.startOfWeek,
+        });
         break;
       case TimeRangeEnum.THIS_WEEK:
-        this.dateFrom = dateFns.startOfWeek(today, {weekStartsOn: this.options.startOfWeek});
-        this.dateTo = dateFns.endOfWeek(today, {weekStartsOn: this.options.startOfWeek});
+        this.dateFrom = startOfWeek(today, {
+          weekStartsOn: this.options.startOfWeek,
+        });
+        this.dateTo = endOfWeek(today, {
+          weekStartsOn: this.options.startOfWeek,
+        });
         break;
       case TimeRangeEnum.THIS_YEAR:
-        this.dateFrom = dateFns.startOfYear(today);
-        this.dateTo = dateFns.endOfYear(today);
+        this.dateFrom = startOfYear(today);
+        this.dateTo = endOfYear(today);
         break;
       case TimeRangeEnum.LAST_YEAR:
-        today = dateFns.subYears(today, 1);
-        this.dateFrom = dateFns.startOfYear(today);
-        this.dateTo = dateFns.endOfYear(today);
+        today = subYears(today, 1);
+        this.dateFrom = startOfYear(today);
+        this.dateTo = endOfYear(today);
         break;
       case TimeRangeEnum.LAST_SEVEN_DAYS:
-        this.dateFrom = dateFns.subDays(today, 7);
+        this.dateFrom = subDays(today, 7);
         this.dateTo = today;
         break;
     }
@@ -292,7 +343,7 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
   updateValue(): void {
     this.value = {
       from: +this.dateFrom,
-      to: +this.dateTo
+      to: +this.dateTo,
     };
     this.opened = false;
     this.setOpenerValues();
@@ -303,10 +354,6 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
     this.openerRange = this.range;
   }
 
-  setSelected(range: string): boolean {
-    return range === this.range;
-  }
-
   resetValues(): void {
     this.dateFrom = this.openerDates[0];
     this.dateTo = this.openerDates[1];
@@ -314,9 +361,12 @@ export class NgxDateRangePickerComponent implements ControlValueAccessor, OnInit
   }
 
   @HostListener('document:click', ['$event'])
-  handleBlurClick(e: MouseEvent) {
+  handleBlurClick(e: MouseEvent): void {
     const target = e.srcElement || e.target;
-    if (!this.elementRef.nativeElement.contains(e.target) && !(<Element>target).classList.contains('day-num')) {
+    if (
+      !this.elementRef.nativeElement.contains(e.target) &&
+      !(target as Element).classList.contains('day-num')
+    ) {
       this.resetValues();
       this.opened = false;
     }
